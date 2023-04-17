@@ -20,3 +20,4 @@ public class Gossiper extends PersonClass{
         return gossips.size() > 0;
     }
 }
+

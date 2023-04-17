@@ -1,5 +1,5 @@
-import dataStructure.Array;
-import dataStructure.ArrayClass;
+
+import dataStructure.*;
 
 public class Sealed extends PersonClass{
 
@@ -24,3 +24,4 @@ public class Sealed extends PersonClass{
 
 
 }
+
