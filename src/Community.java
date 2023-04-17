@@ -1,10 +1,12 @@
+import dataStructure.Iterator;
+
 public interface Community {
 
-    boolean hasLandmark(String landmark);
+    boolean hasLandmark(String place);
     boolean hasName(String name);
-    boolean isInPlace(String name, String landmark);
-    boolean isCrowded(String landmark);
-    boolean isEmpty(String landmark);
+    boolean isInPlace(String name, String place);
+    boolean isCrowded(String place);
+    boolean isEmpty(String place);
     boolean isHome(String name);
     boolean isIsolated(String name);
     boolean sameLandmark(String name1, String name2);
@@ -15,10 +17,12 @@ public interface Community {
     boolean hasGossips();
     boolean hasSharedGossips();
     boolean hasSecrets(String name);
-
     boolean isSealed(String name);
-    String getLandmark(String name);
+    String getLocation(String name);
     void sendHome(String name);
+    Iterator<Person> peopleIterator();
+    Iterator<Landmark> landmarkIterator();
+
 
 
 }

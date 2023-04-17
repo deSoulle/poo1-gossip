@@ -1,6 +1,7 @@
-import com.sun.source.doctree.SeeTree;
-
 import java.util.Scanner;
+
+import dataStructure.*;
+
 public class Main {
 
     /**
@@ -71,7 +72,11 @@ public class Main {
     public static void run(Scanner input, Community community) {
             String prompt = input.next();
             switch (prompt) {
-                case EXIT ->  System.out.println("Bye!"); loop = false; break;
+                case EXIT -> {
+                    System.out.println("Bye!");
+                    loop = false;
+                    break;
+                }
                 case HELP -> System.out.println(HELP_LIST); break;
                 case LANDMARK -> landmark(input, community); break;
                 case LANDMARKS -> listLandmarks(community); break;
@@ -88,8 +93,7 @@ public class Main {
                 case SECRETS -> secrets(input, community); break;
                 case INFOTAINMENT -> infotainment(input, community); break;
                 case HOTTEST -> hottest(community); break;
-                default:
-                    System.out.println("Unknown command. Type help to see available commands.");
+                default -> System.out.println("Unknown command. Type help to see available commands.");
             }
 
             System.out.println();
@@ -125,7 +129,7 @@ public class Main {
      * Lists all the landmarks in the community.
      */
     private static void listLandmarks(Community community) {
-        community.landmarkIterator = Iterator<Landmark>;
+        Iterator<Landmark> it = community.landmarkIterator();
     }
 
     /**
@@ -188,7 +192,7 @@ public class Main {
      * Lists all the people in the community.
      */
     private static void listPeople(Community community) {
-        community.peopleIterator() = Iterator<Person>;
+        Iterator<Person> it = community.peopleIterator();
     }
 
     /**
@@ -240,7 +244,7 @@ public class Main {
             System.out.println(name1 " is at home.");
         }
         else if (!community.sameLandmark(name1, name2)) {
-            System.out.println(name2 + " is not in " + community.getLandmark(name1) + "!");
+            System.out.println(name2 + " is not in " + community.getLocation(name1) + "!");
         }
         else if (community.sameGroup(name1, name2)) {
             System.out.println(name1 + " and " + name2 + " are already in the same group!");
@@ -386,7 +390,7 @@ public class Main {
      * @param input user input;
      * @param community system class;
      */
-    private void infotainment(Scanner input, Community community) {
+    private static void infotainment(Scanner input, Community community) {
 
         String name = input.nextLine();
 
@@ -406,7 +410,7 @@ public class Main {
      * @param community system class:
      *
      */
-    private void hottest(Community community) {
+    private static void hottest(Community community) {
 
         if (!community.hasGossips()) {
             System.out.println("No gossips we are aware of!");
