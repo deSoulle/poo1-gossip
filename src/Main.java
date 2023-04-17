@@ -152,7 +152,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addPerson(name, capacity, FORGETFUL);
+            community.addForgetful(name, capacity);
         }
 
     }
@@ -169,7 +169,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addPerson(name, , GOSSIPER);
+            community.addGossiper(name);
         }
     }
 
@@ -185,7 +185,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addPerson(name, , SEALED);
+            community.addSealed(name);
         }
 
     }
@@ -360,7 +360,7 @@ public class Main {
         else if (community.isIsolated(name)) {
             System.out.println(name + " has nobody to gossip with right now!");
         }
-        else if(!community.canGossip(name)) {
+        else if(!community.knowsGossips(name)) {
             System.out.println(name + " knows nothing!");
         }
         else if(community.isSealed(name)) {

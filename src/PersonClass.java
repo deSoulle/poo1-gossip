@@ -6,6 +6,7 @@ public class PersonClass implements Person{
     private final String name;
     private final String type;
     private final int capacity;
+    private Landmark location;
     private Array<Gossip> gossips;
     private int oldest = 0;
     private Array<Gossip> secrets;
@@ -35,17 +36,22 @@ public class PersonClass implements Person{
 
     @Override
     public boolean atHome() {
-        return false;
+        return location.getName().equals("home");
     }
 
     @Override
     public Landmark location() {
-        return null;
+        return location;
+    }
+
+    @Override
+    public boolean isIsolated() {
+
     }
 
     @Override
     public boolean knowsGossips() {
-        return gossips.size() < 0;
+        return gossips.size() > 0;
     }
 
     @Override

@@ -14,7 +14,6 @@ public interface Community {
     boolean sameGroup(String name1, String name2);
     boolean gossipExists(String source, String[] targets, String gossip);
     boolean knowsGossips(String name);
-    boolean canGossip(String name);
     boolean hasGossips();
     boolean hasSharedGossips();
     boolean hasSecrets(String name);

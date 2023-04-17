@@ -7,13 +7,12 @@ public class CommunityClass implements Community{
 
     private Array<Landmark> landmarks;
     private Array<Person> people;
-
+    private Array<Gossip> gossips;
 
 
     public CommunityClass() {
         landmarks = new ArrayClass<>(1);
         people = new ArrayClass<>(1);
-
     }
 
     @Override
@@ -94,7 +93,8 @@ public class CommunityClass implements Community{
 
     @Override
     public boolean isIsolated(String name) {
-        return false;
+        Person person = getPerson(name);
+        return person.isIsolated();
     }
 
     @Override
@@ -107,12 +107,22 @@ public class CommunityClass implements Community{
 
     @Override
     public boolean sameGroup(String name1, String name2) {
+        Person person1 = getPerson(name1);
+        Person person2 = getPerson(name2);
 
+        Landmark landmark = person1.location();
+        return  landmark.sameGroup(person1, person2);
     }
 
     @Override
     public boolean gossipExists(String source, String[] targets, String gossip) {
-
+        for(int i = 0; i < people.size(); i ++) {
+            if(people.get(i).knowsGossip()) {
+                return true;
+            }
+        }
+        sharing = false;
+        return false;
     }
 
     @Override
@@ -122,18 +132,19 @@ public class CommunityClass implements Community{
     }
 
     @Override
-    public boolean canGossip(String name) {
-        return false;
-    }
-
-    @Override
     public boolean hasGossips() {
-        return ;
+        for(int i = 0; i < people.size(); i ++) {
+            if(people.get(i).knowsGossips()) {
+                return true;
+            }
+        }
+        sharing = false;
+        return false;
     }
 
     @Override
     public boolean hasSharedGossips() {
-        return false;
+        return sharing;
     }
 
     @Override
