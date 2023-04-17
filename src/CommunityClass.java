@@ -1,9 +1,13 @@
 import dataStructure.*;
 
 public class CommunityClass implements Community{
+    private static final String FORGETFUL = "forgetful";
+    private static final String GOSSIPER = "gossiper";
+    private static final String SEALED = "sealed";
 
     private Array<Landmark> landmarks;
     private Array<Person> people;
+
 
 
     public CommunityClass() {
@@ -22,6 +26,11 @@ public class CommunityClass implements Community{
 
         }
         return false;
+    }
+
+    @Override
+    public void addPerson(String name, int capacity, String type) {
+        people.insertLast(new PersonClass(name, capacity, type));
     }
 
     private Landmark getLandmark(String place) {
@@ -69,7 +78,6 @@ public class CommunityClass implements Community{
     public boolean isCrowded(String place) {
         Landmark landmark = getLandmark(place);
         return landmark.isFull();
-
     }
 
     @Override
@@ -103,13 +111,14 @@ public class CommunityClass implements Community{
     }
 
     @Override
-    public boolean hasGossip(String source, String[] targets, String gossip) {
-        return false;
+    public boolean gossipExists(String source, String[] targets, String gossip) {
+
     }
 
     @Override
     public boolean knowsGossips(String name) {
-        return false;
+        Person person = getPerson(name);
+        return person.knowsGossips();
     }
 
     @Override
@@ -119,7 +128,7 @@ public class CommunityClass implements Community{
 
     @Override
     public boolean hasGossips() {
-        return false;
+        return ;
     }
 
     @Override
@@ -129,31 +138,35 @@ public class CommunityClass implements Community{
 
     @Override
     public boolean hasSecrets(String name) {
-        return false;
+        Person person = getPerson(name);
+        return person.hasSecrets();
     }
 
     @Override
     public boolean isSealed(String name) {
-        return false;
+        Person person = getPerson(name);
+        return person.getType().equals(SEALED);
     }
 
     @Override
     public String getLocation(String name) {
-        return null;
+        Person person = getPerson(name);
+        return person.location().getName();
     }
 
     @Override
     public void sendHome(String name) {
-
+        Person person = getPerson(name);
+        person.home();
     }
 
     @Override
     public Iterator<Person> peopleIterator() {
-        return null;
+        return people.iterator();
     }
 
     @Override
     public Iterator<Landmark> landmarkIterator() {
-        return null;
+        return landmarks.iterator();
     }
 }

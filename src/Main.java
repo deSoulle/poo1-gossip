@@ -130,6 +130,10 @@ public class Main {
      */
     private static void listLandmarks(Community community) {
         Iterator<Landmark> it = community.landmarkIterator();
+        while(it.hasNext()) {
+            Landmark landmark = it.next();
+
+        }
     }
 
     /**
@@ -138,7 +142,6 @@ public class Main {
      * Adds a new forgetful-type person.
      */
     private static void forgetful(Scanner input, Community community) {
-
         int capacity = input.nextInt();
         String name = input.next();
 
@@ -149,7 +152,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-
+            community.addPerson(name, capacity, FORGETFUL);
         }
 
     }
@@ -166,7 +169,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-
+            community.addPerson(name, , GOSSIPER);
         }
     }
 
@@ -182,7 +185,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-
+            community.addPerson(name, , SEALED);
         }
 
     }
@@ -250,7 +253,7 @@ public class Main {
             System.out.println(name1 + " and " + name2 + " are already in the same group!");
         }
         else {
-
+            community.addToGroup(name1, name2);
         }
 
     }
@@ -273,6 +276,7 @@ public class Main {
             System.out.println("Nobody is at " + place);
         }
         else {
+            community.groupsIterator();
 
         }
     }
@@ -295,7 +299,7 @@ public class Main {
             System.out.println(name + " is already alone!");
         }
         else {
-
+            community.isolate(name);
         }
 
     }
@@ -330,7 +334,7 @@ public class Main {
                 }
             }
 
-            if (community.hasGossip(name, people, gossip)) {
+            if (community.gossipExists(name, people, gossip)) {
                 System.out.println(DUPLICATED_GOSSIP);
             }
             else {

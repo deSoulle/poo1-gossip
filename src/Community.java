@@ -4,6 +4,7 @@ public interface Community {
 
     boolean hasLandmark(String place);
     boolean hasName(String name);
+    void addPerson(String name, int capacity, String type);
     boolean isInPlace(String name, String place);
     boolean isCrowded(String place);
     boolean isEmpty(String place);
@@ -11,7 +12,7 @@ public interface Community {
     boolean isIsolated(String name);
     boolean sameLandmark(String name1, String name2);
     boolean sameGroup(String name1, String name2);
-    boolean hasGossip(String source, String[] targets, String gossip);
+    boolean gossipExists(String source, String[] targets, String gossip);
     boolean knowsGossips(String name);
     boolean canGossip(String name);
     boolean hasGossips();
