@@ -1,5 +1,4 @@
-import dataStructure.Array;
-import dataStructure.ArrayClass;
+import dataStructure.*;
 
 public abstract class PersonClass implements Person{
 
@@ -40,6 +39,10 @@ public abstract class PersonClass implements Person{
         return gossips.size() > 0;
     }
 
+    @Override
+    public void addGossip(Gossip gossip) {
+
+    }
 
     @Override
     public boolean hasSecrets() {

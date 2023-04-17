@@ -6,7 +6,6 @@ public interface Person {
     void home();
     boolean atHome();
     Landmark location();
-    boolean isIsolated();
     boolean hasGossips();
     boolean knowsGossip();
     void addGossip(Gossip gossip);
