@@ -27,10 +27,6 @@ public class CommunityClass implements Community{
         return false;
     }
 
-    @Override
-    public void addPerson(String name, int capacity, String type) {
-        people.insertLast(new PersonClass(name, capacity, type));
-    }
 
     private Landmark getLandmark(String place) {
         for (int i = 0; i < landmarks.size(); i++) {
@@ -53,6 +49,21 @@ public class CommunityClass implements Community{
 
         }
         return false;
+    }
+
+    @Override
+    public void addGossiper(String name) {
+
+    }
+
+    @Override
+    public void addForgetful(String name, int capacity) {
+
+    }
+
+    @Override
+    public void addSealed(String name) {
+
     }
 
     private Person getPerson(String name) {

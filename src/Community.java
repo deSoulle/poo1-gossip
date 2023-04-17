@@ -4,7 +4,9 @@ public interface Community {
 
     boolean hasLandmark(String place);
     boolean hasName(String name);
-    void addPerson(String name, int capacity, String type);
+    void addGossiper(String name);
+    void addForgetful(String name, int capacity);
+    void addSealed(String name);
     boolean isInPlace(String name, String place);
     boolean isCrowded(String place);
     boolean isEmpty(String place);
