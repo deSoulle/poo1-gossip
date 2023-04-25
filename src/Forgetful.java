@@ -1,23 +1,20 @@
-
-import dataStructure.*;
-
-public class Forgetful extends PersonClass {
-
-    private Array<Gossip> gossips;
-
+public class Forgetful extends Users {
+    private int capacity;
     public Forgetful(String name, int capacity) {
         super(name);
-        gossips = new ArrayClass<>(capacity);
+
+        this.capacity = capacity;
+    }
+
+    public void addGossip(String name) {
+        if (!(super.gossips.size() == capacity)) {
+            super.addGossip(name);
+        }
+        else {
+            super.gossips.removeAt(0);
+            super.addGossip(name);
+        }
     }
 
 
-    @Override
-    public String getType() {
-        return null;
-    }
-
-    @Override
-    public boolean knowsGossip() {
-        return false;
-    }
 }
