@@ -3,6 +3,7 @@ import dataStructure.*;
 public abstract class PersonClass implements Person{
 
     private final String name;
+    private final String type;
     private Landmark location;
     public Array<Gossip> gossips;
     private int oldest = 0;
@@ -10,15 +11,22 @@ public abstract class PersonClass implements Person{
     private boolean home;
 
 
-    public PersonClass(String name) {
+    public PersonClass(String name, String type) {
         this.name = name;
+        this.type = type;
         secrets = new ArrayClass<>();
         gossips = new ArrayClass<>();
+
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 
     @Override
@@ -36,6 +44,8 @@ public abstract class PersonClass implements Person{
     public Landmark location() {
         return location;
     }
+
+
 
     @Override
     public boolean knowsGossip(Gossip gossip) {

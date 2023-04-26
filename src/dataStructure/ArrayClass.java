@@ -49,6 +49,12 @@ public class ArrayClass<E> implements Array<E> {
 	}
 
 	@Override
+	public void remove(E e) {
+		int idx = searchIndexOf(e);
+		removeAt(idx);
+	}
+
+	@Override
 	public void removeLast() {
 		elems[--counter] = null;
 	}

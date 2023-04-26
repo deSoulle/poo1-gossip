@@ -17,6 +17,12 @@ public interface Array<E> {
 	void insertAt(E e, int pos);
 
 	/**
+	 * Remove um especifico elemento do vector
+	 * @pre size() > 0
+	 */
+	void remove(E e);
+
+	/**
 	 * Remove o ultimo elemento do vector
 	 * @pre size() > 0
 	 */

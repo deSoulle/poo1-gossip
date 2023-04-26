@@ -2,18 +2,18 @@ import dataStructure.*;
 
 public class GroupClass implements Group{
 
-    private Array<Person> groupie;
+    private Array<Person> people;
 
 
     public GroupClass(Person person){
-        groupie = new ArrayClass<>(1);
-        groupie.insertLast(person);
+        people = new ArrayClass<>(1);
+        people.insertLast(person);
     }
 
     @Override
     public boolean hasPerson(Person person) {
-        for(int i = 0; i < groupie.size(); i ++) {
-            if(groupie.get(i).equals(person)) {
+        for(int i = 0; i < people.size(); i ++) {
+            if(people.get(i).equals(person)) {
                 return true;
             }
 
@@ -23,6 +23,17 @@ public class GroupClass implements Group{
 
     @Override
     public void addPerson(Person person) {
-        groupie.insertLast(person);
+        people.insertLast(person);
+    }
+
+    @Override
+    public void remove(Person person) {
+        int index = people.searchIndexOf(person);
+        people.removeAt(index);
+    }
+
+    @Override
+    public int counter() {
+        return people.size();
     }
 }

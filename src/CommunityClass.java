@@ -11,8 +11,9 @@ public class CommunityClass implements Community{
 
 
     public CommunityClass() {
-        landmarks = new ArrayClass<>(1);
-        people = new ArrayClass<>(1);
+        landmarks = new ArrayClass<>();
+        people = new ArrayClass<>();
+        gossips = new ArrayClass<>();
     }
 
     @Override
@@ -52,18 +53,12 @@ public class CommunityClass implements Community{
     }
 
     @Override
-    public void addGossiper(String name) {
-
-    }
-
-    @Override
-    public void addForgetful(String name, int capacity) {
-
-    }
-
-    @Override
-    public void addSealed(String name) {
-
+    public void addPerson(String name, String type, int cap) {
+        switch (type) {
+            case GOSSIPER -> people.insertLast(new Gossiper(name));
+            case FORGETFUL -> people.insertLast(new Forgetful(name, cap));
+            case SEALED -> people.insertLast(new Sealed(name));
+        }
     }
 
     private Person getPerson(String name) {
@@ -82,6 +77,16 @@ public class CommunityClass implements Community{
         Person person = getPerson(name);
         String location = person.location().getName();
         return location.equals(place);
+    }
+
+    @Override
+    public void moveToLandmark(String name, String place) {
+        Person person = getPerson(name);
+        Landmark strtPoint = person.location();
+        Landmark destiny = getLandmark(place);
+
+        strtPoint.removePerson(person);
+        destiny.addPerson(person);
     }
 
     @Override
@@ -105,7 +110,15 @@ public class CommunityClass implements Community{
     @Override
     public boolean isIsolated(String name) {
         Person person = getPerson(name);
-        return person.isIsolated();
+        Landmark landmark = person.location();
+        return landmark.isIsolated(person);
+    }
+
+    @Override
+    public void isolate(String name) {
+        Person person = getPerson(name);
+        Landmark landmark = person.location();
+        landmark.isolate(person);
     }
 
     @Override
@@ -114,6 +127,17 @@ public class CommunityClass implements Community{
         Person person2 = getPerson(name2);
 
         return person1.location().equals(person2.location());
+    }
+
+    @Override
+    public void addToGroup(String name1, String name2) {
+        Person person1 = getPerson(name1);
+        Person person2 = getPerson(name2);
+
+        Landmark landmark = person2.location();
+
+        landmark.addToGroup(person1, person2);
+
     }
 
     @Override
@@ -126,15 +150,18 @@ public class CommunityClass implements Community{
     }
 
     @Override
-    public boolean gossipExists(String source, String[] targets, String description) {
+    public boolean gossipExists(String source, Array<String> targets, String description) {
+        return findGossipIdx(source, targets, description) >= 0;
+    }
 
-        for(int i = 0; i < people.size(); i ++) {
-            if(people.get(i).knowsGossip(gossip)) {
-                return true;
+    private int findGossipIdx(String name, Array<String> targets, String description)  {
+        int idx = -1;
+        for (int i = 0; i < gossips.size(); i++) {
+            if (gossips.get(i).isTheSame(name, targets, description)) {
+                idx = i;
             }
         }
-        sharing = false;
-        return false;
+        return idx;
     }
 
     @Override
@@ -175,6 +202,12 @@ public class CommunityClass implements Community{
     public void sendHome(String name) {
         Person person = getPerson(name);
         person.sendHome();
+    }
+
+    @Override
+    public Iterator<Group> groupIterator(String place) {
+        Landmark landmark = getLandmark(place);
+        return landmark.groupsIterator();
     }
 
     @Override

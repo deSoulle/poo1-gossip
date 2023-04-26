@@ -45,4 +45,10 @@ public class GossipClass implements Gossip {
     public int getShares() {
         return shares;
     }
+
+
+    @Override
+    public boolean isTheSame(String name, Array<String> targets, String description) {
+        return author.equals(name) && involved.equals(targets) && description.equals(this.description);
+    }
 }

@@ -77,22 +77,22 @@ public class Main {
                     loop = false;
                     break;
                 }
-                case HELP -> System.out.println(HELP_LIST); break;
-                case LANDMARK -> landmark(input, community); break;
-                case LANDMARKS -> listLandmarks(community); break;
-                case FORGETFUL -> forgetful(input, community); break;
-                case GOSSIPER -> gossiper(input, community); break;
-                case SEALED -> sealed(input, community); break;
-                case PEOPLE -> listPeople(community); break;
-                case GO -> go(input, community); break;
-                case JOIN -> join(input, community); break;
-                case GROUPS -> groups(input, community); break;
-                case ISOLATE -> isolate(input, community); break;
-                case START -> start(input, community); break;
-                case GOSSIP -> gossip(input, community); break;
-                case SECRETS -> secrets(input, community); break;
-                case INFOTAINMENT -> infotainment(input, community); break;
-                case HOTTEST -> hottest(community); break;
+                case HELP -> System.out.println(HELP_LIST);
+                case LANDMARK -> landmark(input, community);
+                case LANDMARKS -> listLandmarks(community);
+                case FORGETFUL -> forgetful(input, community);
+                case GOSSIPER -> gossiper(input, community);
+                case SEALED -> sealed(input, community);
+                case PEOPLE -> listPeople(community);
+                case GO -> go(input, community);
+                case JOIN -> join(input, community);
+                case GROUPS -> groups(input, community);
+                case ISOLATE -> isolate(input, community);
+                case START -> start(input, community);
+                case GOSSIP -> gossip(input, community);
+                case SECRETS -> secrets(input, community);
+                case INFOTAINMENT -> infotainment(input, community);
+                case HOTTEST -> hottest(community);
                 default -> System.out.println("Unknown command. Type help to see available commands.");
             }
 
@@ -152,7 +152,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addForgetful(name, capacity);
+            community.addPerson(name,FORGETFUL, capacity);
         }
 
     }
@@ -169,7 +169,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addGossiper(name);
+            community.addPerson(name, GOSSIPER, 0);
         }
     }
 
@@ -185,7 +185,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addSealed(name);
+            community.addPerson(name, SEALED, 0);
         }
 
     }
@@ -221,7 +221,7 @@ public class Main {
             System.out.println(landmark + " is too crowded! " + name + " went home.");
         }
         else {
-
+            community.moveToLandmark(name, landmark);
         }
     }
 
@@ -244,7 +244,7 @@ public class Main {
             System.out.println(name2 + " does not exist!");
         }
         else if (community.isHome(name1)) {
-            System.out.println(name1 " is at home.");
+            System.out.println(name1 + " is at home.");
         }
         else if (!community.sameLandmark(name1, name2)) {
             System.out.println(name2 + " is not in " + community.getLocation(name1) + "!");
@@ -276,7 +276,7 @@ public class Main {
             System.out.println("Nobody is at " + place);
         }
         else {
-            community.groupsIterator();
+            community.groupIterator(place);
 
         }
     }
@@ -320,21 +320,21 @@ public class Main {
             System.out.println("Invalid number " + n + " of gossip targets!");
         }
         else {
-            String[] people = new String[n];
+            Array<String> targets = new ArrayClass<>();
             for (int i = 0; i < n; i++) {
-                people[i] = input.nextLine();
+                targets.insertLast(new String(input.nextLine()));
             }
 
             String gossip = input.nextLine();
 
             for (int i = 0; i < n; i++) {
-                if (!community.hasName(people[i])) {
-                    System.out.println(people[i] + " does not exist!");
+                if (!community.hasName(targets.get(i))) {
+                    System.out.println(targets.get(i) + " does not exist!");
                     break;
                 }
             }
 
-            if (community.gossipExists(name, people, gossip)) {
+            if (community.gossipExists(name, targets, gossip)) {
                 System.out.println(DUPLICATED_GOSSIP);
             }
             else {
