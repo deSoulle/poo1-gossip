@@ -99,7 +99,7 @@ public class CommunityClass implements Community{
     @Override
     public boolean isHome(String name) {
         Person person = getPerson(name);
-        return person.atHome();
+        return person.isHome();
     }
 
     @Override
@@ -126,9 +126,10 @@ public class CommunityClass implements Community{
     }
 
     @Override
-    public boolean gossipExists(String source, String[] targets, String gossip) {
+    public boolean gossipExists(String source, String[] targets, String description) {
+
         for(int i = 0; i < people.size(); i ++) {
-            if(people.get(i).knowsGossip()) {
+            if(people.get(i).knowsGossip(gossip)) {
                 return true;
             }
         }
@@ -139,18 +140,12 @@ public class CommunityClass implements Community{
     @Override
     public boolean knowsGossips(String name) {
         Person person = getPerson(name);
-        return person.knowsGossips();
+        return person.hasGossips();
     }
 
     @Override
     public boolean hasGossips() {
-        for(int i = 0; i < people.size(); i ++) {
-            if(people.get(i).knowsGossips()) {
-                return true;
-            }
-        }
-        sharing = false;
-        return false;
+        return gossips.size() > 0;
     }
 
     @Override
@@ -179,7 +174,7 @@ public class CommunityClass implements Community{
     @Override
     public void sendHome(String name) {
         Person person = getPerson(name);
-        person.home();
+        person.sendHome();
     }
 
     @Override

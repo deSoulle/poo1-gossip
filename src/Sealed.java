@@ -1,27 +1,16 @@
-
-import dataStructure.*;
-
 public class Sealed extends PersonClass{
 
-    private final String type = "String";
-    private Array<Gossip> gossip;
+    private final String type = "sealed";
 
 
     public Sealed(String name) {
         super(name);
-        gossip = new ArrayClass<>();
     }
 
     @Override
     public String getType() {
         return type;
     }
-
-    @Override
-    public boolean knowsGossip() {
-        return gossip.size() > 0;
-    }
-
 
 }
 

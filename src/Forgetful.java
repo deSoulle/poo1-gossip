@@ -1,20 +1,27 @@
-public class Forgetful extends Users {
+public class Forgetful extends PersonClass {
     private int capacity;
+    private String type = "forgetful";
+
+
     public Forgetful(String name, int capacity) {
         super(name);
-
         this.capacity = capacity;
     }
 
-    public void addGossip(String name) {
+    @Override
+    public String getType(){
+        return type;
+    }
+
+    @Override
+    public void addGossip(Gossip gossip) {
         if (!(super.gossips.size() == capacity)) {
-            super.addGossip(name);
+            super.addGossip(gossip);
         }
         else {
             super.gossips.removeAt(0);
-            super.addGossip(name);
+            super.addGossip(gossip);
         }
     }
-
 
 }

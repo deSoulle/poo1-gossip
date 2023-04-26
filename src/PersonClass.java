@@ -4,14 +4,16 @@ public abstract class PersonClass implements Person{
 
     private final String name;
     private Landmark location;
-    private Array<Gossip> gossips;
+    public Array<Gossip> gossips;
     private int oldest = 0;
     private Array<Gossip> secrets;
+    private boolean home;
+
 
     public PersonClass(String name) {
         this.name = name;
         secrets = new ArrayClass<>();
-
+        gossips = new ArrayClass<>();
     }
 
     @Override
@@ -20,18 +22,29 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
-    public void home() {
-
+    public void sendHome() {
+        home = true;
+        location = null;
     }
 
     @Override
-    public boolean atHome() {
-        return location.getName().equals("home");
+    public boolean isHome() {
+        return home;
     }
 
     @Override
     public Landmark location() {
         return location;
+    }
+
+    @Override
+    public boolean knowsGossip(Gossip gossip) {
+        for(int i = 0; i < gossips.size(); i ++) {
+            if(gossips.get(i).equals(gossip)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -41,7 +54,7 @@ public abstract class PersonClass implements Person{
 
     @Override
     public void addGossip(Gossip gossip) {
-
+        gossips.insertLast(gossip);
     }
 
     @Override
