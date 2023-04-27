@@ -1,3 +1,5 @@
+import dataStructure.*;
+
 public class Forgetful extends PersonClass {
     private int capacity;
 
@@ -17,5 +19,22 @@ public class Forgetful extends PersonClass {
             super.addGossip(gossip);
         }
     }
+
+    @Override
+    public void shareGossips(Person other) {
+        Gossip share = gossips.get(0);
+        share.addShare();
+        if (!other.knowsGossip(share)) {
+            other.addGossip(share);
+        }
+    }
+
+    @Override
+    public Iterator<Gossip> sharedIterator() {
+        Array<Gossip> shared = new ArrayExt<>();
+        shared.insertLast(gossips.get(0));
+        return shared.iterator();
+    }
+
 
 }

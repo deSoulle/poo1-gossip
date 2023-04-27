@@ -31,7 +31,6 @@ public class LandmarkClass implements Landmark{
         }
         Group group = getGroup(person2);
         group.addPerson(person1);
-        counter --;
     }
 
     @Override
@@ -83,10 +82,8 @@ public class LandmarkClass implements Landmark{
         if(group.size() <= 0) {
            groups.remove(group);
         }
-        else {
 
-        }
-
+        counter --;
     }
 
     @Override
@@ -103,6 +100,11 @@ public class LandmarkClass implements Landmark{
     @Override
     public int getOcupation() {
         return counter;
+    }
+
+    @Override
+    public int getGroups() {
+        return groups.size();
     }
 
     @Override

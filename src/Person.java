@@ -1,8 +1,9 @@
+import dataStructure.*;
+
 public interface Person {
 
 
     String getName();
-    String getType();
     void sendHome();
     boolean isHome();
     Landmark location();
@@ -13,4 +14,7 @@ public interface Person {
     boolean hasSecrets();
     int gossipsSize();
     void addSecret(Gossip secret);
+    Iterator<Gossip> sharedIterator();
+    Iterator<Gossip> secretIterator();
+    Iterator<Gossip> gossipsIterator();
 }

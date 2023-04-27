@@ -15,5 +15,7 @@ public interface Landmark {
     void addPerson(Person person);
     int getCapacity();
     int getOcupation();
+    int getGroups();
     Iterator<Group> groupsIterator();
+
 }

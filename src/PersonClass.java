@@ -45,8 +45,6 @@ public abstract class PersonClass implements Person{
         return location;
     }
 
-
-
     @Override
     public boolean knowsGossip(Gossip gossip) {
         for(int i = 0; i < gossips.size(); i ++) {
@@ -68,11 +66,6 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
-    public void shareGossip(Person other) {
-
-    }
-
-    @Override
     public boolean hasSecrets() {
         return secrets.size() < 0;
     }
@@ -85,5 +78,15 @@ public abstract class PersonClass implements Person{
     @Override
     public void addSecret(Gossip secret) {
         secrets.insertLast(secret);
+    }
+
+    @Override
+    public Iterator<Gossip> secretIterator() {
+        return secrets.iterator();
+    }
+
+    @Override
+    public Iterator<Gossip> gossipsIterator() {
+        return gossips.iterator();
     }
 }

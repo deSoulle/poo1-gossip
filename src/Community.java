@@ -4,6 +4,7 @@ import dataStructure.Iterator;
 public interface Community {
 
     boolean hasLandmark(String place);
+    void addLandmark(String name, int capacity);
     boolean hasName(String name);
     void addPerson(String name, String forgetful, int capacity);
     boolean isInPlace(String name, String place);
@@ -15,6 +16,8 @@ public interface Community {
     void isolate(String name);
     boolean sameLandmark(String name1, String name2);
     void addToGroup(String name1, String name2);
+    int getGroups(String place);
+    String getGroupies(String name);
     boolean sameGroup(String name1, String name2);
     boolean gossipExists(String source, Array<String> targets, String gossip);
     void createGossip(String author, Array<String> targets, String gossip);
@@ -26,10 +29,13 @@ public interface Community {
     void shareGossips(String name);
     String getLocation(String name);
     void sendHome(String name);
-    void addLandmark(String name, int capacity);
+    String getHighestShare();
     Iterator<Group> groupIterator(String place);
     Iterator<Person> peopleIterator();
     Iterator<Landmark> landmarkIterator();
-
+    Iterator<Gossip> sharedGossipsIterator(String name);
+    Iterator<Gossip> secretsIterator(String name);
+    Iterator<Gossip> gossipsIterator(String name);
+    Iterator<Gossip> hottestIterator();
 
 }

@@ -1,11 +1,8 @@
-import dataStructure.Array;
-import dataStructure.ArrayClass;
+import dataStructure.*;
 
 public interface Gossip {
-    Person getAuthor();
-    boolean isInvolved(Person target);
     String getDescription();
-    void share();
+    void addShare();
     int getShares();
     boolean isTheSame(String name, Array<String> targets, String description);
 }

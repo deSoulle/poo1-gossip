@@ -28,6 +28,10 @@ public class CommunityClass implements Community {
         return false;
     }
 
+    @Override
+    public void addLandmark(String name, int capacity) {
+        landmarks.insertLast(new LandmarkClass(name, capacity));
+    }
 
     private Landmark getLandmark(String place) {
         for (int i = 0; i < landmarks.size(); i++) {
@@ -141,6 +145,21 @@ public class CommunityClass implements Community {
     }
 
     @Override
+    public int getGroups(String place) {
+        Landmark landmark = getLandmark(place);
+        return landmark.getGroups();
+    }
+
+    @Override
+    public String getGroupies(String name) {
+        Person person = getPerson(name);
+        Landmark landmark = person.location();
+        Group group = landmark.getGroup(person);
+
+        return group.listGroupies(person);
+    }
+
+    @Override
     public boolean sameGroup(String name1, String name2) {
         Person person1 = getPerson(name1);
         Person person2 = getPerson(name2);
@@ -160,11 +179,15 @@ public class CommunityClass implements Community {
         Array<Person> involved = new ArrayExt<>();
         for(int i = 0; i < targets.size(); i ++) {
             involved.insertLast(getPerson(targets.get(i)));
-
         }
         Gossip neo = new GossipClass(person, involved, gossip);
         gossips.insertLast(neo);
         person.addGossip(neo);
+
+        for(int i = 0; i < targets.size(); i ++) {
+            involved.get(i).addSecret(neo);
+        }
+
     }
 
     private int findGossipIdx(String name, Array<String> targets, String description)  {
@@ -223,7 +246,7 @@ public class CommunityClass implements Community {
         for(int i = 0; i < group.size(); i ++) {
             Person target = group.getPerson(i);
             if(!target.equals(person)) {
-                person.shareGossip(target);
+                person.shareGossips(target);
             }
         }
 
@@ -242,8 +265,8 @@ public class CommunityClass implements Community {
     }
 
     @Override
-    public void addLandmark(String name, int capacity) {
-        landmarks.insertLast(new LandmarkClass(name, capacity));
+    public String getHighestShare() {
+        return null;
     }
 
     @Override
@@ -260,5 +283,43 @@ public class CommunityClass implements Community {
     @Override
     public Iterator<Landmark> landmarkIterator() {
         return landmarks.iterator();
+    }
+
+    @Override
+    public Iterator<Gossip> sharedGossipsIterator(String name) {
+        Person person = getPerson(name);
+        return person.sharedIterator();
+    }
+
+    @Override
+    public Iterator<Gossip> secretsIterator(String name) {
+        Person person = getPerson(name);
+        return person.secretIterator();
+    }
+
+    @Override
+    public Iterator<Gossip> gossipsIterator(String name) {
+        Person person = getPerson(name);
+        return person.gossipsIterator();
+    }
+
+    @Override
+    public Iterator<Gossip> hottestIterator() {
+        Array<Gossip> hottest = findHottest();
+        return hottest.iterator();
+    }
+
+    private Array<Gossip> findHottest() {
+        Array<Gossip> hottests = new ArrayExt<>();
+        int maxShares = 0;
+
+        for (int i = 0; i < gossips.size(); i ++) {
+            Gossip gossip = gossips.get(i);
+            if(gossip.getShares() >= maxShares) {
+                hottests = new ArrayExt<>();
+                hottests.insertLast(gossip);
+            }
+        }
+        return hottests;
     }
 }

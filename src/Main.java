@@ -27,23 +27,24 @@ public class Main {
     /**
      * Strings constants for system outputs.
      */
-    private static final String HELP_LIST = "\"landmark - adds a new landmark to the community\\n\" +\n" +
-            "                \"landmarks - displays the list of landmarks in the community\\n\" +\n" +
-            "                \"forgetful - adds a forgetful person to the community\\n\" +\n" +
-            "                \"gossiper - adds a gossiper person to the community\\n\" +\n" +
-            "                \"sealed - adds a sealed lips person to the community\\n\" +\n" +
-            "                \"people - lists all the persons in the community\\n\" +\n" +
-            "                \"go - moves a person to a landmark, or home\\n\" +\n" +
-            "                \"join - joins a person to a group\\n\" +\n" +
-            "                \"groups - lists the groups composition in a landmark\\n\" +\n" +
-            "                \"isolate - makes a person leave the current group, but not the landmark the person is currently on\\n\" +\n" +
-            "                \"start - starts a new gossip\\n\" +\n" +
-            "                \"gossip - share a gossip within the current group in the current landmark\\n\" +\n" +
-            "                \"secrets - lists the gossip about a particular person\\n\" +\n" +
-            "                \"infotainment - lists the gossips a particular person is aware of\\n\" +\n" +
-            "                \"hottest - lists the most shared gossip\\n\" +\n" +
-            "                \"help - shows the available commands\\n\" +\n" +
-            "                \"exit - terminates the execution of the program\"";
+    private static final String HELP_LIST = """
+            "landmark - adds a new landmark to the community\\n" +
+                            "landmarks - displays the list of landmarks in the community\\n" +
+                            "forgetful - adds a forgetful person to the community\\n" +
+                            "gossiper - adds a gossiper person to the community\\n" +
+                            "sealed - adds a sealed lips person to the community\\n" +
+                            "people - lists all the persons in the community\\n" +
+                            "go - moves a person to a landmark, or home\\n" +
+                            "join - joins a person to a group\\n" +
+                            "groups - lists the groups composition in a landmark\\n" +
+                            "isolate - makes a person leave the current group, but not the landmark the person is currently on\\n" +
+                            "start - starts a new gossip\\n" +
+                            "gossip - share a gossip within the current group in the current landmark\\n" +
+                            "secrets - lists the gossip about a particular person\\n" +
+                            "infotainment - lists the gossips a particular person is aware of\\n" +
+                            "hottest - lists the most shared gossip\\n" +
+                            "help - shows the available commands\\n" +
+                            "exit - terminates the execution of the program\"""";
     private static final String ERROR_CREATE_HOME = "Cannot create a landmark called home. You know, there is no place like home!";
     private static final String ERROR_HOME = "You must understand we have no surveillance tech at home! Privacy is our top concern!";
     private static final String DUPLICATED_GOSSIP = "Duplicate gossip!";
@@ -75,7 +76,6 @@ public class Main {
                 case EXIT -> {
                     System.out.println("Bye!");
                     loop = false;
-                    break;
                 }
                 case HELP -> System.out.println(HELP_LIST);
                 case LANDMARK -> landmark(input, community);
@@ -161,7 +161,7 @@ public class Main {
             System.out.println(name + " already exists!");
         }
         else {
-            community.addPerson(name,FORGETFUL, capacity);
+            community.addPerson(name, FORGETFUL, capacity);
             System.out.println(name + " can only remember up to " +  capacity + " gossips.");
         }
 
@@ -239,7 +239,7 @@ public class Main {
         if (!community.hasName(name)) {
             System.out.println(name + " does not exists!");
         }
-        else if (community.hasLandmark(landmark)) {
+        else if (community.hasLandmark(landmark) && landmark.equals("home")) {
             System.out.println("Unknown place " + landmark + "!");
         }
         else if (community.isInPlace(name, landmark)) {
@@ -251,8 +251,9 @@ public class Main {
         }
         else {
             community.moveToLandmark(name, landmark);
-            System.out.println();
+            System.out.println(name + " is now at " + landmark + ".");
         }
+
     }
 
     /**
@@ -284,7 +285,7 @@ public class Main {
         }
         else {
             community.addToGroup(name1, name2);
-
+            System.out.println(name1 + "joined " + community.getGroupies(name1) + "at the " + community.getLocation(name2));
         }
 
     }
@@ -307,10 +308,25 @@ public class Main {
             System.out.println("Nobody is at " + place);
         }
         else {
-            community.groupIterator(place);
+            listGroups(community, place);
+        }
 
+    }
+
+
+    /**
+     * @param community class system;
+     * Lists all the groups at the specified landmark.
+     */
+    private static void listGroups(Community community, String place) {
+        Iterator<Group> it = community.groupIterator(place);
+
+        System.out.println(community.getGroups(place) +  " groups at " + place + ":");
+        while (it.hasNext()) {
+               System.out.println(it.next().listGroupies(null));
         }
     }
+
 
     /**
      * @param input user input;
@@ -341,47 +357,50 @@ public class Main {
      * creates a new gossip.
      */
     private static void start(Scanner input, Community community) {
-        String author = input.next();
-        int n = input.nextInt(); input.nextLine();
+        String author = input.nextLine();
+        int n = input.nextInt();input.nextLine();
 
-        if (!community.hasName(author))  {
+        Array<String> targets = new ArrayExt<>();
+        for(int i = 0; i < n; i ++) {
+            targets.insertLast(input.nextLine());
+        }
+
+        String gossip = input.nextLine();
+
+
+        if(!community.hasName(author)) {
             System.out.println(author + " does not exist!");
         }
         else if (n <= 0) {
             System.out.println("Invalid number " + n + " of gossip targets!");
         }
-        else {
-            Array<String> targets = new ArrayExt<>();
-            for (int i = 0; i < n; i++) {
-                targets.insertLast(new String(input.nextLine()));
+
+        boolean targetsExist = true;
+        for (int i = 0; i < n; i++) {
+            if (!community.hasName(targets.get(i))) {
+                System.out.println(targets.get(i) + " does not exist!");
+                targetsExist = false;
+                break;
             }
+        }
 
-            String gossip = input.nextLine();
-
-            for (int i = 0; i < n; i++) {
-                if (!community.hasName(targets.get(i))) {
-                    System.out.println(targets.get(i) + " does not exist!");
-                    break;
-                }
-            }
-
+        if(targetsExist) {
             if (community.gossipExists(author, targets, gossip)) {
                 System.out.println(DUPLICATED_GOSSIP);
-            }
-            else {
+            } else {
                 community.createGossip(author, targets, gossip);
             }
-
         }
 
     }
+
+
 
     /**
      * @param input user input;
      * @param community system class;
      * checks if a certain can spread gossips it knows (if it knows any) and if so shares them.
      */
-
     private static void gossip(Scanner input, Community community) {
         String name = input.nextLine();
 
@@ -399,14 +418,29 @@ public class Main {
         }
         else {
             community.shareGossips(name);
+            System.out.println(name + "shared with " + community.getGroupies(name) + "some hot news!");
+            listSharedGossips(community, name);
         }
 
     }
 
     /**
+     * @param community class system;
+     * @param name name of the person that shared gossips;
+     * Lists all the gossips shared by the specified person.
+     */
+    private static void listSharedGossips(Community community, String name) {
+        Iterator<Gossip> it = community.sharedGossipsIterator(name);
+
+        while(it.hasNext()) {
+            System.out.println(it.next().getDescription());
+        }
+    }
+
+    /**
      * @param input user input;
      * @param community system class;
-     * check if a person has secrets around about it.
+     * check if a person has secrets around about them and how many people know them.
      */
     private static void secrets(Scanner input, Community community) {
         String name = input.nextLine();
@@ -416,17 +450,31 @@ public class Main {
         else if(!community.hasSecrets(name))
             System.out.println(name + " lives a very boring life!");
         else {
-
+            listSecrets(community, name);
         }
 
     }
 
     /**
+     * @param community class system;
+     * @param name name of the person whose secrets are about;
+     * Lists all the secrets about a person and how many people know about them.
+     */
+    private static void listSecrets(Community community, String name) {
+        Iterator<Gossip> it = community.secretsIterator(name);
+
+        while (it.hasNext()) {
+            Gossip secret = it.next();
+            System.out.println(secret.getShares() + " " + secret.getDescription() + ".");
+        }
+    }
+
+    /**
      * @param input user input;
      * @param community system class;
+     * Lists the gossips a person is aware of.
      */
     private static void infotainment(Scanner input, Community community) {
-
         String name = input.nextLine();
 
         if (!community.hasName(name)) {
@@ -437,8 +485,22 @@ public class Main {
         }
         else {
             System.out.println(name+ " knows things:");
+            listGossips(community, name);
         }
 
+    }
+
+    /**
+     * @param community system class;
+     * @param name of the specified person;
+     * Lists the gossips a person is aware of.
+     */
+    private static void listGossips(Community community, String name) {
+        Iterator<Gossip> it = community.gossipsIterator(name);
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
     }
 
     /**
@@ -449,14 +511,26 @@ public class Main {
 
         if (!community.hasGossips()) {
             System.out.println("No gossips we are aware of!");
-        }
-        else if(!community.hasSharedGossips()) {
+        } else if (!community.hasSharedGossips()) {
             System.out.println("No gossips were shared, yet!");
+        } else {
+            listHottest(community);
         }
-        else {
-            
-        }
-
     }
+
+    /**
+     * @param community system class;
+     * Lists the most shared gossips in the community.
+     */
+    private static void listHottest(Community community) {
+        Iterator<Gossip> it = community.hottestIterator();
+
+        System.out.println("The hottest gossips were shared " + community.getHighestShare() + "times!");
+
+        while (it.hasNext()) {
+            System.out.println(it.next().getDescription());
+        }
+    }
+
 
 }

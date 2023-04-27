@@ -38,7 +38,20 @@ public class GroupClass implements Group{
     }
 
     @Override
+    public String listGroupies(Person person) {
+        String list = "";
+        for(int i = 0; i < people.size(); i ++) {
+            Person groupie = people.get(i);
+            if(!groupie.equals(person)) {
+              list = list.concat(groupie.getName() + ", ");
+            }
+        }
+        return list;
+    }
+
+    @Override
     public int size() {
         return people.size();
     }
+
 }

@@ -16,28 +16,12 @@ public class GossipClass implements Gossip {
     }
 
     @Override
-    public Person getAuthor() {
-        return author;
-    }
-
-    @Override
-    public boolean isInvolved(Person target) {
-        for(int i = 0; i < involved.size(); i ++) {
-            if (involved.get(i).equals(target)) {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    @Override
     public String getDescription() {
         return description;
     }
 
     @Override
-    public void share() {
+    public void addShare() {
         shares ++;
     }
 
@@ -45,7 +29,6 @@ public class GossipClass implements Gossip {
     public int getShares() {
         return shares;
     }
-
 
     @Override
     public boolean isTheSame(String name, Array<String> targets, String description) {
