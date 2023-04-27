@@ -11,9 +11,9 @@ public class CommunityClass implements Community{
 
 
     public CommunityClass() {
-        landmarks = new ArrayClass<>();
-        people = new ArrayClass<>();
-        gossips = new ArrayClass<>();
+        landmarks = new ArrayExt<>();
+        people = new ArrayExt<>();
+        gossips = new ArrayExt<>();
     }
 
     @Override

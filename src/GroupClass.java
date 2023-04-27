@@ -6,7 +6,7 @@ public class GroupClass implements Group{
 
 
     public GroupClass(Person person){
-        people = new ArrayClass<>(1);
+        people = new ArrayExt<>();
         people.insertLast(person);
     }
 
