@@ -2,7 +2,7 @@ package dataStructure;
 
 import java.util.Arrays;
 
-public class ArrayClass<E> implements Array<E> {
+public abstract class ArrayClass<E> implements Array<E> {
 	private static final int SIZE = 50;
 
 	/**
@@ -46,12 +46,6 @@ public class ArrayClass<E> implements Array<E> {
 			elems[i+1] = elems[i];
 		elems[pos] = e;
 		counter++;
-	}
-
-	@Override
-	public void remove(E e) {
-		int idx = searchIndexOf(e);
-		removeAt(idx);
 	}
 
 	@Override
@@ -114,7 +108,7 @@ public class ArrayClass<E> implements Array<E> {
 	@Override
 	@SuppressWarnings({"unchecked"})
 	public Array<E> sort() {
-		Array<E> sorted = new ArrayClass<>();
+		Array<E> sorted = new ArrayExt<>();
 		Iterator<E> it = this.iterator();
 
 		Object[] a = new Object[this.size()];

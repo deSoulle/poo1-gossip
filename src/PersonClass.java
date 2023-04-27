@@ -14,8 +14,8 @@ public abstract class PersonClass implements Person{
     public PersonClass(String name, String type) {
         this.name = name;
         this.type = type;
-        secrets = new ArrayClass<>();
-        gossips = new ArrayClass<>();
+        secrets = new ArrayExt<>();
+        gossips = new ArrayExt<>();
 
     }
 

@@ -12,7 +12,7 @@ public class LandmarkClass implements Landmark{
         this.name = name;
         this.capacity = capacity;
         counter = 0;
-
+        groups = new ArrayExt<>();
     }
 
 
@@ -24,9 +24,7 @@ public class LandmarkClass implements Landmark{
     @Override
     public void addToGroup(Person person1, Person person2) {
         if (isIsolated(person1)) {
-            Group delete = getGroup(person1);
-            int index = groups.searchIndexOf(delete);
-            groups.removeAt(index);
+            groups.remove(getGroup(person1));
         }
         else {
             getGroup(person1).remove(person1);
@@ -83,8 +81,7 @@ public class LandmarkClass implements Landmark{
         group.remove(person);
 
         if(group.counter() <= 0) {
-            int idx = groups.searchIndexOf(group);
-            groups.removeAt(idx);
+           groups.remove(group);
         }
 
     }
