@@ -9,8 +9,8 @@ public interface Person {
     boolean hasGossips();
     boolean knowsGossip(Gossip gossip);
     void addGossip(Gossip gossip);
+    void shareGossips(Person other);
     boolean hasSecrets();
+    int gossipsSize();
     void addSecret(Gossip secret);
-
-
 }

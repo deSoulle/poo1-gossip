@@ -17,17 +17,19 @@ public interface Community {
     void addToGroup(String name1, String name2);
     boolean sameGroup(String name1, String name2);
     boolean gossipExists(String source, Array<String> targets, String gossip);
+    void createGossip(String author, Array<String> targets, String gossip);
     boolean knowsGossips(String name);
     boolean hasGossips();
     boolean hasSharedGossips();
     boolean hasSecrets(String name);
     boolean isSealed(String name);
+    void shareGossips(String name);
     String getLocation(String name);
     void sendHome(String name);
+    void addLandmark(String name, int capacity);
     Iterator<Group> groupIterator(String place);
     Iterator<Person> peopleIterator();
     Iterator<Landmark> landmarkIterator();
-
 
 
 }

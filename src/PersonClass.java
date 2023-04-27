@@ -5,9 +5,9 @@ public abstract class PersonClass implements Person{
     private final String name;
     private final String type;
     private Landmark location;
-    public Array<Gossip> gossips;
+    Array<Gossip> gossips;
     private int oldest = 0;
-    private Array<Gossip> secrets;
+    Array<Gossip> secrets;
     private boolean home;
 
 
@@ -68,8 +68,18 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
+    public void shareGossip(Person other) {
+
+    }
+
+    @Override
     public boolean hasSecrets() {
         return secrets.size() < 0;
+    }
+
+    @Override
+    public int gossipsSize() {
+        return gossips.size();
     }
 
     @Override

@@ -65,7 +65,7 @@ public class LandmarkClass implements Landmark{
 
     @Override
     public boolean isIsolated(Person person) {
-        return getGroup(person).counter() == 1;
+        return getGroup(person).size() == 1;
     }
 
     @Override
@@ -80,8 +80,11 @@ public class LandmarkClass implements Landmark{
         Group group = getGroup(person);
         group.remove(person);
 
-        if(group.counter() <= 0) {
+        if(group.size() <= 0) {
            groups.remove(group);
+        }
+        else {
+
         }
 
     }
@@ -90,6 +93,16 @@ public class LandmarkClass implements Landmark{
     public void addPerson(Person person) {
         groups.insertLast(new GroupClass(person));
         counter ++;
+    }
+
+    @Override
+    public int getCapacity() {
+        return capacity;
+    }
+
+    @Override
+    public int getOcupation() {
+        return counter;
     }
 
     @Override

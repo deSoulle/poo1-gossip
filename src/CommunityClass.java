@@ -1,13 +1,13 @@
 import dataStructure.*;
 
-public class CommunityClass implements Community{
+public class CommunityClass implements Community {
     private static final String FORGETFUL = "forgetful";
     private static final String GOSSIPER = "gossiper";
     private static final String SEALED = "sealed";
 
-    private Array<Landmark> landmarks;
-    private Array<Person> people;
-    private Array<Gossip> gossips;
+    Array<Landmark> landmarks;
+    Array<Person> people;
+    Array<Gossip> gossips;
 
 
     public CommunityClass() {
@@ -154,6 +154,19 @@ public class CommunityClass implements Community{
         return findGossipIdx(source, targets, description) >= 0;
     }
 
+    @Override
+    public void createGossip(String author, Array<String> targets, String gossip) {
+        Person person = getPerson(author);
+        Array<Person> involved = new ArrayExt<>();
+        for(int i = 0; i < targets.size(); i ++) {
+            involved.insertLast(getPerson(targets.get(i)));
+
+        }
+        Gossip neo = new GossipClass(person, involved, gossip);
+        gossips.insertLast(neo);
+        person.addGossip(neo);
+    }
+
     private int findGossipIdx(String name, Array<String> targets, String description)  {
         int idx = -1;
         for (int i = 0; i < gossips.size(); i++) {
@@ -177,7 +190,16 @@ public class CommunityClass implements Community{
 
     @Override
     public boolean hasSharedGossips() {
-        return sharing;
+        return hasShares();
+    }
+
+    private boolean hasShares() {
+        for (int i = 0; i < gossips.size(); i++) {
+            if (gossips.get(i).getShares() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -189,7 +211,22 @@ public class CommunityClass implements Community{
     @Override
     public boolean isSealed(String name) {
         Person person = getPerson(name);
-        return person.getType().equals(SEALED);
+        return person instanceof Sealed;
+    }
+
+    @Override
+    public void shareGossips(String name) {
+        Person person = getPerson(name);
+        Landmark landmark = person.location();
+        Group group = landmark.getGroup(person);
+
+        for(int i = 0; i < group.size(); i ++) {
+            Person target = group.getPerson(i);
+            if(!target.equals(person)) {
+                person.shareGossip(target);
+            }
+        }
+
     }
 
     @Override
@@ -202,6 +239,11 @@ public class CommunityClass implements Community{
     public void sendHome(String name) {
         Person person = getPerson(name);
         person.sendHome();
+    }
+
+    @Override
+    public void addLandmark(String name, int capacity) {
+        landmarks.insertLast(new LandmarkClass(name, capacity));
     }
 
     @Override

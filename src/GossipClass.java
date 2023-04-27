@@ -4,7 +4,7 @@ import dataStructure.*;
 public class GossipClass implements Gossip {
 
     private final Person author;
-    private final Array<Person> involved;
+    Array<Person> involved;
     private final String description;
     private int shares;
 

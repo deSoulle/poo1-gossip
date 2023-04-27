@@ -13,7 +13,7 @@ public interface Landmark {
     void isolate(Person person);
     void removePerson(Person person);
     void addPerson(Person person);
+    int getCapacity();
+    int getOcupation();
     Iterator<Group> groupsIterator();
-
-
 }

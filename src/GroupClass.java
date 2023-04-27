@@ -2,7 +2,7 @@ import dataStructure.*;
 
 public class GroupClass implements Group{
 
-    private Array<Person> people;
+    Array<Person> people;
 
 
     public GroupClass(Person person){
@@ -33,7 +33,12 @@ public class GroupClass implements Group{
     }
 
     @Override
-    public int counter() {
+    public Person getPerson(int pos) {
+        return people.get(pos);
+    }
+
+    @Override
+    public int size() {
         return people.size();
     }
 }

@@ -6,5 +6,10 @@ public class Gossiper extends PersonClass{
     }
 
 
+    @Override
+    public void shareGossip(Person other) {
+
+    }
+
 }
 

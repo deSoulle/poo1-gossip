@@ -119,7 +119,8 @@ public class Main {
             System.out.println("Landmark " + name + " already exists!");
         }
         else {
-
+            community.addLandmark(name, capacity);
+            System.out.println(name + " added.");
         }
 
     }
@@ -132,8 +133,16 @@ public class Main {
         Iterator<Landmark> it = community.landmarkIterator();
         while(it.hasNext()) {
             Landmark landmark = it.next();
-
+            printLandmarks(landmark);
         }
+    }
+
+    /**
+     * @param landmark an object of the Landmark class;
+     * Auxiliary method that prints the desired text.
+     */
+    private static void printLandmarks(Landmark landmark) {
+        System.out.println(landmark.getName() + ": " + landmark.getCapacity() + " " + landmark.getOcupation() + ".");
     }
 
     /**
@@ -153,6 +162,7 @@ public class Main {
         }
         else {
             community.addPerson(name,FORGETFUL, capacity);
+            System.out.println(name + " can only remember up to " +  capacity + " gossips.");
         }
 
     }
@@ -170,6 +180,7 @@ public class Main {
         }
         else {
             community.addPerson(name, GOSSIPER, 0);
+            System.out.println(name + " is a gossiper.");
         }
     }
 
@@ -186,6 +197,7 @@ public class Main {
         }
         else {
             community.addPerson(name, SEALED, 0);
+            System.out.println(name + " lips are sealed.");
         }
 
     }
@@ -196,6 +208,23 @@ public class Main {
      */
     private static void listPeople(Community community) {
         Iterator<Person> it = community.peopleIterator();
+        if (!it.hasNext()) {
+            System.out.println("This community does not have any people yet!");
+        }
+        else {
+            while (it.hasNext()) {
+                Person person = it.next();
+                printPeople(person);
+            }
+        }
+    }
+
+    /**
+     * @param person object of the Person class;
+     * Auxiliary method that prints the desired text.
+     */
+    private static void printPeople(Person person) {
+        System.out.println(person.getName() + " at " + person.location() + " knows " + person.gossipsSize() + " gossips.");
     }
 
     /**
@@ -222,6 +251,7 @@ public class Main {
         }
         else {
             community.moveToLandmark(name, landmark);
+            System.out.println();
         }
     }
 
@@ -254,6 +284,7 @@ public class Main {
         }
         else {
             community.addToGroup(name1, name2);
+
         }
 
     }
@@ -310,17 +341,17 @@ public class Main {
      * creates a new gossip.
      */
     private static void start(Scanner input, Community community) {
-        String name = input.next();
+        String author = input.next();
         int n = input.nextInt(); input.nextLine();
 
-        if (!community.hasName(name))  {
-            System.out.println(name + " does not exist!");
+        if (!community.hasName(author))  {
+            System.out.println(author + " does not exist!");
         }
         else if (n <= 0) {
             System.out.println("Invalid number " + n + " of gossip targets!");
         }
         else {
-            Array<String> targets = new ArrayClass<>();
+            Array<String> targets = new ArrayExt<>();
             for (int i = 0; i < n; i++) {
                 targets.insertLast(new String(input.nextLine()));
             }
@@ -334,11 +365,11 @@ public class Main {
                 }
             }
 
-            if (community.gossipExists(name, targets, gossip)) {
+            if (community.gossipExists(author, targets, gossip)) {
                 System.out.println(DUPLICATED_GOSSIP);
             }
             else {
-
+                community.createGossip(author, targets, gossip);
             }
 
         }
@@ -367,7 +398,7 @@ public class Main {
             System.out.println(name + " does not wish to gossip right now!");
         }
         else {
-
+            community.shareGossips(name);
         }
 
     }
