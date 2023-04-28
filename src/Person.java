@@ -7,6 +7,7 @@ public interface Person {
     void sendHome();
     boolean isHome();
     Landmark location();
+    void move(Landmark destination);
     boolean hasGossips();
     boolean knowsGossip(Gossip gossip);
     void addGossip(Gossip gossip);

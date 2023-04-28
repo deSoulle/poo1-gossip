@@ -5,7 +5,7 @@ public class Forgetful extends PersonClass {
 
 
     public Forgetful(String name, int capacity) {
-        super(name, "forgetful");
+        super(name);
         this.capacity = capacity;
     }
 

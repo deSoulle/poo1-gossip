@@ -107,7 +107,7 @@ public class Main {
      */
     private static void landmark(Scanner input, Community community) {
         int capacity = input.nextInt();
-        String name = input.next();
+        String name = input.nextLine().trim();
 
         if (capacity <= 0) {
             System.out.println("Invalid landmark capacity " + capacity + "!");
@@ -152,7 +152,7 @@ public class Main {
      */
     private static void forgetful(Scanner input, Community community) {
         int capacity = input.nextInt();
-        String name = input.next();
+        String name = input.nextLine().trim();
 
         if (capacity <= 0) {
             System.out.println("Invalid gossips capacity " + capacity + "!");
@@ -173,7 +173,7 @@ public class Main {
      * Adds a new gossiper-type person.
      */
     private static void gossiper(Scanner input, Community community) {
-        String name = input.next();
+        String name = input.nextLine().trim();
 
         if (community.hasName(name)) {
             System.out.println(name + " already exists!");
@@ -190,7 +190,7 @@ public class Main {
      * Adds a new sealed lips-type person.
      */
     private static void sealed(Scanner input, Community community) {
-        String name = input.next();
+        String name = input.nextLine().trim();
 
         if (community.hasName(name)) {
             System.out.println(name + " already exists!");
@@ -224,7 +224,14 @@ public class Main {
      * Auxiliary method that prints the desired text.
      */
     private static void printPeople(Person person) {
-        System.out.println(person.getName() + " at " + person.location() + " knows " + person.gossipsSize() + " gossips.");
+        String location;
+        if(person.location() == null) {
+            location = "home";
+        }
+        else {
+            location = person.location().getName();
+        }
+        System.out.println(person.getName() + " at " + location + " knows " + person.gossipsSize() + " gossips.");
     }
 
     /**
@@ -233,7 +240,7 @@ public class Main {
      * Moves a person to a landmark.
      */
     private static void go(Scanner input, Community community) {
-        String name = input.next(); input.nextLine();
+        String name = input.nextLine().trim();
         String landmark = input.next();
 
         if (!community.hasName(name)) {
@@ -262,8 +269,8 @@ public class Main {
      * Joins a person to a group.
      */
     private static void join(Scanner input, Community community) {
-        String name1 = input.nextLine();
-        String name2 = input.next();
+        String name1 = input.nextLine().trim();
+        String name2 = input.nextLine().trim();
 
         if (name1.equals(name2)) {
             System.out.println(name1 + " needs company from someone else!");
@@ -285,7 +292,7 @@ public class Main {
         }
         else {
             community.addToGroup(name1, name2);
-            System.out.println(name1 + "joined " + community.getGroupies(name1) + "at the " + community.getLocation(name2));
+            System.out.println(name1 + " joined " + community.getGroupies(name1) + "at the " + community.getLocation(name2));
         }
 
     }
@@ -296,7 +303,7 @@ public class Main {
      * Lists the groups located at the desired landmark.
      */
     private static void groups(Scanner input, Community community) {
-        String place = input.next();
+        String place = input.nextLine().trim();
 
         if (place.equals("home")) {
             System.out.println(ERROR_HOME);
@@ -334,7 +341,7 @@ public class Main {
      * isolated a person from the groups at its landmark.
      */
     private static void isolate(Scanner input, Community community) {
-        String name = input.next();
+        String name = input.nextLine().trim();
 
         if (!community.hasName(name)) {
             System.out.println(name + " does not exist!");
@@ -347,6 +354,7 @@ public class Main {
         }
         else {
             community.isolate(name);
+            System.out.println(name + " is now alone at " + community.getLocation(name));
         }
 
     }
@@ -357,7 +365,7 @@ public class Main {
      * creates a new gossip.
      */
     private static void start(Scanner input, Community community) {
-        String author = input.nextLine();
+        String author = input.nextLine().trim();
         int n = input.nextInt();input.nextLine();
 
         Array<String> targets = new ArrayExt<>();
@@ -366,7 +374,6 @@ public class Main {
         }
 
         String gossip = input.nextLine();
-
 
         if(!community.hasName(author)) {
             System.out.println(author + " does not exist!");
@@ -387,11 +394,22 @@ public class Main {
         if(targetsExist) {
             if (community.gossipExists(author, targets, gossip)) {
                 System.out.println(DUPLICATED_GOSSIP);
-            } else {
+            }
+            else {
                 community.createGossip(author, targets, gossip);
+                System.out.println("Have you heard about " + listTargets(targets) + "? " + gossip);
             }
         }
 
+    }
+
+    private static String listTargets(Array<String> targets) {
+        String list = "";
+        list = list.concat(targets.get(0));
+        for(int i = 1; i < targets.size(); i ++) {
+            list = list.concat(", " + targets.get(i));
+        }
+        return list;
     }
 
 
@@ -402,7 +420,7 @@ public class Main {
      * checks if a certain can spread gossips it knows (if it knows any) and if so shares them.
      */
     private static void gossip(Scanner input, Community community) {
-        String name = input.nextLine();
+        String name = input.nextLine().trim();
 
         if (!community.hasName(name)) {
             System.out.println(name + " does not exist!");
@@ -443,7 +461,7 @@ public class Main {
      * check if a person has secrets around about them and how many people know them.
      */
     private static void secrets(Scanner input, Community community) {
-        String name = input.nextLine();
+        String name = input.nextLine().trim();
 
         if (!community.hasName(name))
             System.out.println(name + " does not exist!");
@@ -475,7 +493,7 @@ public class Main {
      * Lists the gossips a person is aware of.
      */
     private static void infotainment(Scanner input, Community community) {
-        String name = input.nextLine();
+        String name = input.nextLine().trim();
 
         if (!community.hasName(name)) {
             System.out.println(name + " does not exist!");

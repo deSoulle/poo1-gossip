@@ -78,19 +78,31 @@ public class CommunityClass implements Community {
 
     @Override
     public boolean isInPlace(String name, String place) {
+        Landmark landmark = getLandmark(place);
         Person person = getPerson(name);
-        String location = person.location().getName();
-        return location.equals(place);
+
+        if(person.location() == null) {
+            return false;
+        }
+        else {
+            return person.location().equals(landmark);
+        }
     }
 
     @Override
     public void moveToLandmark(String name, String place) {
         Person person = getPerson(name);
-        Landmark strtPoint = person.location();
         Landmark destiny = getLandmark(place);
 
-        strtPoint.removePerson(person);
-        destiny.addPerson(person);
+        if(person.isHome()) {
+            person.move(destiny);
+            destiny.addPerson(person);
+        }
+        else {
+            Landmark strtPoint = person.location();
+            strtPoint.removePerson(person);
+            destiny.addPerson(person);
+        }
     }
 
     @Override

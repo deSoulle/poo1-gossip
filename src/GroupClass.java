@@ -28,8 +28,7 @@ public class GroupClass implements Group{
 
     @Override
     public void remove(Person person) {
-        int index = people.searchIndexOf(person);
-        people.removeAt(index);
+        people.remove(person);
     }
 
     @Override
