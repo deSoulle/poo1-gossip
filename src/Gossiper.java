@@ -12,11 +12,15 @@ public class Gossiper extends PersonClass{
     public void shareGossips(Person other) {
         int num = Math.min(gossips.size(), 3);
 
-        for (int i = 0; i < num; i ++) {
-            Gossip share = gossips.get(i);
-            share.addShare();
+        for (int i = 0 ; i < num; i ++) {
+            Gossip share = gossips.get(last);
             if (!other.knowsGossip(share)) {
+                share.addShare();
                 other.addGossip(share);
+            }
+            last++;
+            if (last == gossips.size()) {
+                last = 0;
             }
         }
 

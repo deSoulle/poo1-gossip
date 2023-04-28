@@ -4,27 +4,26 @@ import dataStructure.Iterator;
 
 public class Sealed extends PersonClass{
 
-    private int oldest;
-
-
     public Sealed(String name) {
         super(name);
-        oldest = 0;
     }
 
     @Override
     public void shareGossips(Person other) {
-        Gossip share = secrets.get(oldest ++);
+        Gossip share = secrets.get(last++);
         share.addShare();
         if(!other.knowsGossip(share)) {
             other.addGossip(share);
+        }
+        if (last == secrets.size()) {
+            last = 0;
         }
     }
 
     @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
-        shared.insertLast(gossips.get(oldest));
+        shared.insertLast(gossips.get(last));
         return shared.iterator();
     }
 

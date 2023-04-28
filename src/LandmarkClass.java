@@ -53,7 +53,7 @@ public class LandmarkClass implements Landmark{
 
     @Override
     public boolean isEmpty() {
-        return capacity == 0;
+        return counter == 0;
     }
 
     @Override

@@ -27,24 +27,24 @@ public class Main {
     /**
      * Strings constants for system outputs.
      */
-    private static final String HELP_LIST = """
-            "landmark - adds a new landmark to the community\\n" +
-                            "landmarks - displays the list of landmarks in the community\\n" +
-                            "forgetful - adds a forgetful person to the community\\n" +
-                            "gossiper - adds a gossiper person to the community\\n" +
-                            "sealed - adds a sealed lips person to the community\\n" +
-                            "people - lists all the persons in the community\\n" +
-                            "go - moves a person to a landmark, or home\\n" +
-                            "join - joins a person to a group\\n" +
-                            "groups - lists the groups composition in a landmark\\n" +
-                            "isolate - makes a person leave the current group, but not the landmark the person is currently on\\n" +
-                            "start - starts a new gossip\\n" +
-                            "gossip - share a gossip within the current group in the current landmark\\n" +
+    private static final String HELP_LIST =
+            "landmark - adds a new landmark to the community\n" +
+                    "landmarks - displays the list of landmarks in the community\n" +
+                            "forgetful - adds a forgetful person to the community\n" +
+                            "gossiper - adds a gossiper person to the community\n" +
+                            "sealed - adds a sealed lips person to the community\n" +
+                            "people - lists all the persons in the community\n" +
+                            "go - moves a person to a landmark, or home\n" +
+                            "join - joins a person to a group\n" +
+                            "groups - lists the groups composition in a landmark\n" +
+                            "isolate - makes a person leave the current group, but not the landmark the person is currently on\n" +
+                            "start - starts a new gossip\n" +
+                            "gossip - share a gossip within the current group in the current landmark\n" +
                             "secrets - lists the gossip about a particular person\\n" +
-                            "infotainment - lists the gossips a particular person is aware of\\n" +
-                            "hottest - lists the most shared gossip\\n" +
-                            "help - shows the available commands\\n" +
-                            "exit - terminates the execution of the program\"""";
+                            "infotainment - lists the gossips a particular person is aware of\n" +
+                            "hottest - lists the most shared gossip\n" +
+                            "help - shows the available commands\n" +
+                            "exit - terminates the execution of the program";
     private static final String ERROR_CREATE_HOME = "Cannot create a landmark called home. You know, there is no place like home!";
     private static final String ERROR_HOME = "You must understand we have no surveillance tech at home! Privacy is our top concern!";
     private static final String DUPLICATED_GOSSIP = "Duplicate gossip!";
@@ -71,7 +71,7 @@ public class Main {
     * Method used to run the desired commands
     */
     public static void run(Scanner input, Community community) {
-            String prompt = input.next();
+            String prompt = input.next().toLowerCase().trim();
             switch (prompt) {
                 case EXIT -> {
                     System.out.println("Bye!");
@@ -93,10 +93,11 @@ public class Main {
                 case SECRETS -> secrets(input, community);
                 case INFOTAINMENT -> infotainment(input, community);
                 case HOTTEST -> hottest(community);
-                default -> System.out.println("Unknown command. Type help to see available commands.");
+                default -> {
+                    input.nextLine();
+                    System.out.println("Unknown command. Type help to see available commands.");
+                }
             }
-
-            System.out.println();
 
     }
 
@@ -131,6 +132,9 @@ public class Main {
      */
     private static void listLandmarks(Community community) {
         Iterator<Landmark> it = community.landmarkIterator();
+        if (!it.hasNext()) {
+            System.out.println("This community does not have any landmarks yet!");
+        }
         while(it.hasNext()) {
             Landmark landmark = it.next();
             printLandmarks(landmark);
@@ -241,7 +245,7 @@ public class Main {
      */
     private static void go(Scanner input, Community community) {
         String name = input.nextLine().trim();
-        String landmark = input.next();
+        String landmark = input.nextLine().trim();
 
         if (!community.hasName(name)) {
             System.out.println(name + " does not exists!");
@@ -282,7 +286,7 @@ public class Main {
             System.out.println(name2 + " does not exist!");
         }
         else if (community.isHome(name1)) {
-            System.out.println(name1 + " is at home.");
+            System.out.println(name1 + " is at home!");
         }
         else if (!community.sameLandmark(name1, name2)) {
             System.out.println(name2 + " is not in " + community.getLocation(name1) + "!");
@@ -292,7 +296,7 @@ public class Main {
         }
         else {
             community.addToGroup(name1, name2);
-            System.out.println(name1 + " joined " + community.getGroupies(name1) + "at the " + community.getLocation(name2));
+            System.out.println(name1 + " joined " + community.getGroupies(name1) + "at the " + community.getLocation(name2) + ".");
         }
 
     }
@@ -312,7 +316,7 @@ public class Main {
             System.out.println(place + " does not exist!");
         }
         else if (community.isEmpty(place)) {
-            System.out.println("Nobody is at " + place);
+            System.out.println("Nobody is at " + place + ".");
         }
         else {
             listGroups(community, place);

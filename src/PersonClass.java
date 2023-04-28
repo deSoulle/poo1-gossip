@@ -4,9 +4,10 @@ public abstract class PersonClass implements Person{
 
     private final String name;
     private Landmark location;
-    Array<Gossip> gossips;
-    Array<Gossip> secrets;
+    protected Array<Gossip> gossips;
+    protected Array<Gossip> secrets;
     private boolean home;
+    protected int last;
 
 
     public PersonClass(String name) {
@@ -24,6 +25,9 @@ public abstract class PersonClass implements Person{
 
     @Override
     public void sendHome() {
+        if (!home) {
+            location.removePerson(this);
+        }
         home = true;
         location = null;
     }

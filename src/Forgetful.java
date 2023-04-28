@@ -22,10 +22,13 @@ public class Forgetful extends PersonClass {
 
     @Override
     public void shareGossips(Person other) {
-        Gossip share = gossips.get(0);
+        Gossip share = gossips.get(last++);
         share.addShare();
         if (!other.knowsGossip(share)) {
             other.addGossip(share);
+        }
+        if (last == gossips.size()) {
+            last = 0;
         }
     }
 
