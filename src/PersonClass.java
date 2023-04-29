@@ -6,13 +6,12 @@ public abstract class PersonClass implements Person{
     private Landmark location;
     protected Array<Gossip> gossips;
     protected Array<Gossip> secrets;
-    private boolean home;
     protected int last;
 
 
     public PersonClass(String name) {
         this.name = name;
-        home = true;
+        location = null;
         secrets = new ArrayExt<>();
         gossips = new ArrayExt<>();
 
@@ -25,16 +24,12 @@ public abstract class PersonClass implements Person{
 
     @Override
     public void sendHome() {
-        if (!home) {
-            location.removePerson(this);
-        }
-        home = true;
         location = null;
     }
 
     @Override
     public boolean isHome() {
-        return home;
+        return location == null;
     }
 
     @Override
@@ -45,7 +40,6 @@ public abstract class PersonClass implements Person{
     @Override
     public void move(Landmark destination) {
         location = destination;
-        home = false;
     }
 
     @Override

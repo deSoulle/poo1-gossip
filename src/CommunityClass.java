@@ -280,6 +280,7 @@ public class CommunityClass implements Community {
     @Override
     public void sendHome(String name) {
         Person person = getPerson(name);
+        person.location().removePerson(person);
         person.sendHome();
     }
 
@@ -312,7 +313,7 @@ public class CommunityClass implements Community {
     public Iterator<Person> peopleIterator() {
         return people.iterator();
     }
-    
+
     @Override
     public Iterator<Gossip> sharedGossipsIterator(String name) {
         Person person = getPerson(name);

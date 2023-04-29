@@ -258,7 +258,7 @@ public class Main {
         if (!community.hasName(name)) {
             System.out.println(name + " does not exists!");
         }
-        else if (community.hasLandmark(landmark) && landmark.equals("home")) {
+        else if (!community.hasLandmark(landmark) || landmark.equals("home")) {
             System.out.println("Unknown place " + landmark + "!");
         }
         else if (community.isInPlace(name, landmark)) {
@@ -453,7 +453,7 @@ public class Main {
         }
         else {
             community.shareGossips(name);
-            System.out.println(name + "shared with " + community.getGroupies(name) + "some hot news!");
+            System.out.println(name + " shared with " + community.getGroupies(name) + "some hot news!");
             listSharedGossips(community, name);
         }
 
@@ -462,7 +462,7 @@ public class Main {
     /**
      * @param community class system;
      * @param name name of the person that shared gossips;
-     * Lists all the gossips shared by the specified person.
+     * lists all the gossips shared by the specified person.
      */
     private static void listSharedGossips(Community community, String name) {
         Iterator<Gossip> it = community.sharedGossipsIterator(name);
@@ -493,7 +493,7 @@ public class Main {
     /**
      * @param community class system;
      * @param name name of the person whose secrets are about;
-     * Lists all the secrets about a person and how many people know about them.
+     * lists all the secrets about a person and how many people know about them.
      */
     private static void listSecrets(Community community, String name) {
         Iterator<Gossip> it = community.secretsIterator(name);
@@ -507,7 +507,7 @@ public class Main {
     /**
      * @param input user input;
      * @param community system class;
-     * Lists the gossips a person is aware of.
+     * lists the gossips a person is aware of.
      */
     private static void infotainment(Scanner input, Community community) {
         String name = input.nextLine().trim();
@@ -528,7 +528,7 @@ public class Main {
     /**
      * @param community system class;
      * @param name of the specified person;
-     * Lists the gossips a person is aware of.
+     * lists the gossips a person is aware of.
      */
     private static void listGossips(Community community, String name) {
         Iterator<Gossip> it = community.gossipsIterator(name);
@@ -539,8 +539,8 @@ public class Main {
     }
 
     /**
-     * @param community system class:
-     *
+     * @param community system class;
+     *lists the most shared gossips;
      */
     private static void hottest(Community community) {
 
@@ -555,12 +555,12 @@ public class Main {
 
     /**
      * @param community system class;
-     * Lists the most shared gossips in the community.
+     * lists the most shared gossips in the community.
      */
     private static void listHottest(Community community) {
         Iterator<Gossip> it = community.hottestIterator();
 
-        System.out.println("The hottest gossips were shared " + community.getHighestShare() + "times!");
+        System.out.println("The hottest gossips were shared " + community.getHighestShare() + " times!");
 
         while (it.hasNext()) {
             System.out.println(it.next().getDescription());
