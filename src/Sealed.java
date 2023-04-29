@@ -1,6 +1,4 @@
-import dataStructure.Array;
-import dataStructure.ArrayExt;
-import dataStructure.Iterator;
+import dataStructure.*;
 
 public class Sealed extends PersonClass{
 
@@ -10,15 +8,23 @@ public class Sealed extends PersonClass{
 
     @Override
     public void shareGossips(Person other) {
-        Gossip share = secrets.get(last++);
+        Gossip share = gossips.get(last++);
         share.addShare();
-        if(!other.knowsGossip(share)) {
+        if (!other.knowsGossip(share)) {
             other.addGossip(share);
         }
-        if (last == secrets.size()) {
+        if (last == gossips.size()) {
             last = 0;
         }
     }
+
+    @Override
+    public void addGossip(Gossip gossip) {
+        if (gossip.isAbout(this)) {
+            gossips.insertLast(gossip);
+        }
+    }
+
 
     @Override
     public Iterator<Gossip> sharedIterator() {

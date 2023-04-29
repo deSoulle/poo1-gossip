@@ -100,6 +100,7 @@ public class CommunityClass implements Community {
         }
         else {
             Landmark strtPoint = person.location();
+            person.move(destiny);
             strtPoint.removePerson(person);
             destiny.addPerson(person);
         }
@@ -182,7 +183,14 @@ public class CommunityClass implements Community {
 
     @Override
     public boolean gossipExists(String source, Array<String> targets, String description) {
-        return findGossipIdx(source, targets, description) >= 0;
+        Person author = getPerson(source);
+
+        Array<Person> ptargets = new ArrayExt<>();
+        for(int i = 0; i < targets.size(); i ++) {
+            ptargets.insertLast(getPerson(targets.get(i)));
+        }
+
+        return findGossipIdx(author, ptargets, description);
     }
 
     @Override
@@ -202,14 +210,13 @@ public class CommunityClass implements Community {
 
     }
 
-    private int findGossipIdx(String name, Array<String> targets, String description)  {
-        int idx = -1;
+    private boolean findGossipIdx(Person author, Array<Person> targets, String description)  {
         for (int i = 0; i < gossips.size(); i++) {
-            if (gossips.get(i).isTheSame(name, targets, description)) {
-                idx = i;
+            if (gossips.get(i).isTheSame(author, targets, description)) {
+                return true;
             }
         }
-        return idx;
+        return false;
     }
 
     @Override

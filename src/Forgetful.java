@@ -1,7 +1,7 @@
 import dataStructure.*;
 
 public class Forgetful extends PersonClass {
-    private int capacity;
+    private final int capacity;
 
 
     public Forgetful(String name, int capacity) {

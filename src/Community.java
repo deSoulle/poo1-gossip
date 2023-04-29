@@ -1,5 +1,4 @@
-import dataStructure.Array;
-import dataStructure.Iterator;
+import dataStructure.*;
 
 public interface Community {
 

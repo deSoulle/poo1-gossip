@@ -28,23 +28,24 @@ public class Main {
      * Strings constants for system outputs.
      */
     private static final String HELP_LIST =
-            "landmark - adds a new landmark to the community\n" +
-                    "landmarks - displays the list of landmarks in the community\n" +
-                            "forgetful - adds a forgetful person to the community\n" +
-                            "gossiper - adds a gossiper person to the community\n" +
-                            "sealed - adds a sealed lips person to the community\n" +
-                            "people - lists all the persons in the community\n" +
-                            "go - moves a person to a landmark, or home\n" +
-                            "join - joins a person to a group\n" +
-                            "groups - lists the groups composition in a landmark\n" +
-                            "isolate - makes a person leave the current group, but not the landmark the person is currently on\n" +
-                            "start - starts a new gossip\n" +
-                            "gossip - share a gossip within the current group in the current landmark\n" +
-                            "secrets - lists the gossip about a particular person\\n" +
-                            "infotainment - lists the gossips a particular person is aware of\n" +
-                            "hottest - lists the most shared gossip\n" +
-                            "help - shows the available commands\n" +
-                            "exit - terminates the execution of the program";
+        """
+                    landmark - adds a new landmark to the community
+                    landmarks - displays the list of landmarks in the community
+                    forgetful - adds a forgetful person to the community
+                    gossiper - adds a gossiper person to the community
+                    sealed - adds a sealed lips person to the community
+                    people - lists all the persons in the community
+                    go - moves a person to a landmark, or home
+                    join - joins a person to a group
+                    groups - lists the groups composition in a landmark
+                    isolate - makes a person leave the current group, but not the landmark the person is currently on
+                    start - starts a new gossip
+                    gossip - share a gossip within the current group in the current landmark
+                    secrets - lists the gossip about a particular person
+                    infotainment - lists the gossips a particular person is aware of
+                    hottest - lists the most shared gossip
+                    help - shows the available commands
+                    exit - terminates the execution of the program""";
     private static final String ERROR_CREATE_HOME = "Cannot create a landmark called home. You know, there is no place like home!";
     private static final String ERROR_HOME = "You must understand we have no surveillance tech at home! Privacy is our top concern!";
     private static final String DUPLICATED_GOSSIP = "Duplicate gossip!";
@@ -211,7 +212,7 @@ public class Main {
      * Lists all the people in the community.
      */
     private static void listPeople(Community community) {
-        Iterator<Person> it = community.peopleIterator();
+       Iterator<Person> it = community.peopleIterator();
         if (!it.hasNext()) {
             System.out.println("This community does not have any people yet!");
         }
@@ -384,25 +385,30 @@ public class Main {
         }
         else if (n <= 0) {
             System.out.println("Invalid number " + n + " of gossip targets!");
+
+
         }
 
-        boolean targetsExist = true;
-        for (int i = 0; i < n; i++) {
-            if (!community.hasName(targets.get(i))) {
-                System.out.println(targets.get(i) + " does not exist!");
-                targetsExist = false;
-                break;
+        else {
+            boolean targetsExist = true;
+            for (int i = 0; i < n; i++) {
+                if (!community.hasName(targets.get(i))) {
+                    System.out.println(targets.get(i) + " does not exist!");
+                    targetsExist = false;
+                    break;
+                }
             }
-        }
+            if(targetsExist) {
+                if (community.gossipExists(author, targets, gossip)) {
+                    System.out.println(DUPLICATED_GOSSIP);
+                }
+                else {
+                    community.createGossip(author, targets, gossip);
+                    System.out.println("Have you heard about " + listTargets(targets) + "? " + gossip);
+                }
 
-        if(targetsExist) {
-            if (community.gossipExists(author, targets, gossip)) {
-                System.out.println(DUPLICATED_GOSSIP);
             }
-            else {
-                community.createGossip(author, targets, gossip);
-                System.out.println("Have you heard about " + listTargets(targets) + "? " + gossip);
-            }
+
         }
 
     }
@@ -521,7 +527,7 @@ public class Main {
         Iterator<Gossip> it = community.gossipsIterator(name);
 
         while (it.hasNext()) {
-            System.out.println(it.next());
+            System.out.println(it.next().getDescription());
         }
     }
 

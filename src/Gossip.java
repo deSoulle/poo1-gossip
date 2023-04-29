@@ -4,5 +4,6 @@ public interface Gossip {
     String getDescription();
     void addShare();
     int getShares();
-    boolean isTheSame(String name, Array<String> targets, String description);
+    boolean isTheSame(Person name, Array<Person> targets, String description);
+    boolean isAbout(Person person);
 }

@@ -31,7 +31,41 @@ public class GossipClass implements Gossip {
     }
 
     @Override
-    public boolean isTheSame(String name, Array<String> targets, String description) {
-        return author.equals(name) && involved.equals(targets) && description.equals(this.description);
+    public boolean isTheSame(Person person, Array<Person> targets, String description) {
+        return author.equals(person) && targetsAreEqual(targets) && description.equals(this.description);
     }
+
+    @Override
+    public boolean isAbout(Person person) {
+        for(int i = 0; i < involved.size(); i ++ ){
+            if(involved.get(i).equals(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean targetsAreEqual(Array<Person> targets) {
+        if(targets.size() == involved.size()) {
+            for (int i = 0; i < involved.size(); i++) {
+                for (int j = 0; j < targets.size(); j++) {
+                    if (involved.get(i).equals(targets.get(j))) {
+                        break;
+                    }
+                    else if (j == targets.size() - 1) {
+                        return false;
+                    }
+
+                }
+
+            }
+            return true;
+
+        }
+        else {
+            return false;
+        }
+    }
+
+
 }
