@@ -284,8 +284,22 @@ public class CommunityClass implements Community {
     }
 
     @Override
-    public String getHighestShare() {
-        return null;
+    public int getHighestShare() {
+        int maxShares = 0;
+
+        for (int i = 0; i < gossips.size(); i ++) {
+            Gossip gossip = gossips.get(i);
+            if(gossip.getShares() > maxShares) {
+                maxShares = gossip.getShares();
+            }
+        }
+
+        return maxShares;
+    }
+
+    @Override
+    public Iterator<Landmark> landmarkIterator() {
+        return landmarks.iterator();
     }
 
     @Override
@@ -298,12 +312,7 @@ public class CommunityClass implements Community {
     public Iterator<Person> peopleIterator() {
         return people.iterator();
     }
-
-    @Override
-    public Iterator<Landmark> landmarkIterator() {
-        return landmarks.iterator();
-    }
-
+    
     @Override
     public Iterator<Gossip> sharedGossipsIterator(String name) {
         Person person = getPerson(name);

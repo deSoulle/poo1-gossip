@@ -1,6 +1,13 @@
-import java.util.Scanner;
+/**
+ * @author Afonso de Sousa, 65548;
+ * @author Miguel Victorino, 6;
+*/
 
 import dataStructure.*;
+
+import java.util.Scanner;
+
+
 
 public class Main {
 
