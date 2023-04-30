@@ -57,6 +57,13 @@ public class GossipClass implements Gossip {
         knows.insertLast(person);
     }
 
+    @Override
+    public void delete() {
+        for ( int i = 0; i < involved.size(); i++ ) {
+            involved.get(i).removeGossip(this);
+        }
+    }
+
     private boolean targetsAreEqual(Array<Person> targets) {
         if(targets.size() == involved.size()) {
             for (int i = 0; i < involved.size(); i++) {

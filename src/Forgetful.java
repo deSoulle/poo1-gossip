@@ -15,6 +15,7 @@ public class Forgetful extends PersonClass {
         }
         else {
             gossips.get(0).removeShare();
+            if ( gossips.get(0).getShares() == 0 ) { gossips.get(0).delete(); }
             gossips.removeAt(0);
             super.addGossip(gossip);
         }

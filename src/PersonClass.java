@@ -96,6 +96,11 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
+    public void removeGossip(GossipClass gossip) {
+        secrets.remove(gossip);
+    }
+
+    @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
         int tmp = last - 1;

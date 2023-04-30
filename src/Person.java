@@ -81,4 +81,5 @@ public interface Person {
      */
     Iterator<Gossip> gossipsIterator();
 
+    void removeGossip(GossipClass gossip);
 }
