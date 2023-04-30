@@ -152,7 +152,7 @@ public interface Community {
      * @param name name of the person;
      * @return true if person's person-type is sealed;
      */
-    boolean isSealed(String name);
+    boolean hasAboutThem(String name);
 
     /**
      * @param name name of the person;

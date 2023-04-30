@@ -31,7 +31,10 @@ public class LandmarkClass implements Landmark{
         }
         Group group = getGroup(person2);
         group.addPerson(person1);
-        person1.resetLast();
+        if(person1 instanceof Sealed) {
+            person1.resetLast();
+        }
+
     }
 
     @Override

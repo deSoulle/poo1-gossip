@@ -71,6 +71,8 @@ public interface Person {
      */
     Iterator<Gossip> sharedIterator();
 
+    boolean knowsSecrets();
+
     /**
      * @return secrets array iterator;
      */
