@@ -62,14 +62,24 @@ public interface Person {
      */
     int gossipsSize();
 
+    /**
+     * resets the index of the last shared gossip
+     */
     void resetLast();
-    void addSecrets(Gossip neo);
+
+    /**
+     * @param Secret new gossip object;
+     * adds a new gossip about the person to the secrets array;
+     */
+    void addSecrets(Gossip Secret);
 
     /**
      * @return gossip iterator;
      * makes an iterator of the last gossips shared;
      */
     Iterator<Gossip> sharedIterator();
+
+    boolean knowsSecrets();
 
     /**
      * @return secrets array iterator;
