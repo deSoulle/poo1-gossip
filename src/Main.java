@@ -503,7 +503,6 @@ public class Main {
      */
     private static void listSecrets(Community community, String name) {
         Iterator<Gossip> it = community.secretsIterator(name);
-
         while (it.hasNext()) {
             Gossip secret = it.next();
             System.out.println(secret.getShares() + " " + secret.getDescription());
