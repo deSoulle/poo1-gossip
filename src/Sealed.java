@@ -23,7 +23,7 @@ public class Sealed extends PersonClass{
     @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
-        shared.insertLast(gossips.get(last -1));
+        shared.insertLast(gossips.get(last - 1));
         return shared.iterator();
     }
 
