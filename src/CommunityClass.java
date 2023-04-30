@@ -355,10 +355,16 @@ public class CommunityClass implements Community {
         int maxShares = 0;
 
         for (int i = 0; i < gossips.size(); i ++) {
-            Gossip gossip = gossips.get(i);
-            if(gossip.getShares() >= maxShares) {
-                hottest = new ArrayExt<>();
-                hottest.insertLast(gossip);
+            Gossip gossip1 = gossips.get(i);
+            for (int j = i+1; j < gossips.size(); j++) {
+                Gossip gossip2 = gossips.get(j);
+                if (gossip1.getShares() < gossip2.getShares()) {
+                    maxShares = gossip2.getShares();
+                }
+            }
+            if (gossip1.getShares() >= maxShares) {
+                hottest.insertLast(gossip1);
+                maxShares = gossip1.getShares();
             }
         }
         return hottest;
