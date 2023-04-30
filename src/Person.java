@@ -62,12 +62,6 @@ public interface Person {
      */
     int gossipsSize();
 
-    /**
-     * @param secret new gossip object;
-     * adds a gossip
-     */
-    void addSecret(Gossip secret);
-
     void resetLast();
 
     /**
