@@ -18,7 +18,7 @@ public class Gossiper extends PersonClass{
                 share.addShare();
                 other.addGossip(share);
             }
-            last++;
+            last ++;
             if (last == gossips.size()) {
                 last = 0;
             }

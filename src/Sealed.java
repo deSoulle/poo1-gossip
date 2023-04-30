@@ -11,20 +11,20 @@ public class Sealed extends PersonClass{
         Gossip share = gossips.get(last++);
         share.addShare();
         if (!other.knowsGossip(share)) {
-            other.addGossip(share);
+            if (share.isAbout(this)) {
+                other.addGossip(share);
+            }
         }
+
         if (last == gossips.size()) {
             last = 0;
         }
+
     }
 
-    @Override
-    public void addGossip(Gossip gossip) {
-        if (gossip.isAbout(this)) {
-            gossips.insertLast(gossip);
-        }
+    public void resetLast() {
+        last = 0;
     }
-
 
     @Override
     public Iterator<Gossip> sharedIterator() {

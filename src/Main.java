@@ -106,7 +106,6 @@ public class Main {
                     System.out.println("Unknown command. Type help to see available commands.");
                 }
             }
-
     }
 
     /**
@@ -369,6 +368,7 @@ public class Main {
             System.out.println(name + " is now alone at " + community.getLocation(name));
         }
 
+
     }
 
     /**
@@ -521,6 +521,7 @@ public class Main {
         else {
             System.out.println(name+ " knows things:");
             listGossips(community, name);
+
         }
 
     }

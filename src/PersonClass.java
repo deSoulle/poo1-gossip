@@ -64,7 +64,7 @@ public abstract class PersonClass implements Person{
 
     @Override
     public boolean hasSecrets() {
-        return secrets.size() < 0;
+        return secrets.size() > 0;
     }
 
     @Override

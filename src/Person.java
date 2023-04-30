@@ -67,6 +67,10 @@ public interface Person {
      * adds a gossip
      */
     void addSecret(Gossip secret);
+
+    /**
+     * @return
+     */
     Iterator<Gossip> sharedIterator();
     Iterator<Gossip> secretIterator();
     Iterator<Gossip> gossipsIterator();

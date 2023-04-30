@@ -280,8 +280,10 @@ public class CommunityClass implements Community {
     @Override
     public void sendHome(String name) {
         Person person = getPerson(name);
-        person.location().removePerson(person);
-        person.sendHome();
+        if(!person.isHome()) {
+            person.location().removePerson(person);
+            person.sendHome();
+        }
     }
 
     @Override
