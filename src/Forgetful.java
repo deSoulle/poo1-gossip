@@ -10,9 +10,6 @@ public class Forgetful extends PersonClass {
         super(name);
         this.capacity = capacity;
         original = new ArrayExt<>();
-        for (int i = 0; i < gossips.size(); i++) {
-            original.insertLast(gossips.get(i));
-        }
     }
 
     @Override
@@ -32,7 +29,10 @@ public class Forgetful extends PersonClass {
 
     @Override
     public void resetOrder() {
-        gossips = original;
+        for (int i = 0; i < gossips.size(); i++) {
+            gossips.removeAt(i);
+            gossips.insertAt(original.get(i), i);
+        }
     }
 
 
