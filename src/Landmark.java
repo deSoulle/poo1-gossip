@@ -2,6 +2,10 @@ import dataStructure.Iterator;
 
 public interface Landmark {
 
+
+    /**
+     * @return name of the String
+     */
     String getName();
 
     void addToGroup(Person person1, Person person2);

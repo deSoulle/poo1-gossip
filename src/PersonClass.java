@@ -98,5 +98,5 @@ public abstract class PersonClass implements Person{
         shared.insertLast(gossips.get(tmp));
         return shared.iterator();
     }
-    
+
 }

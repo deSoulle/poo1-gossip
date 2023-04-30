@@ -65,10 +65,19 @@ public interface Person {
     void resetLast();
 
     /**
-     * @return
+     * @return gossip iterator;
+     * makes an iterator of the last gossips shared;
      */
     Iterator<Gossip> sharedIterator();
+
+    /**
+     * @return secrets array iterator;
+     */
     Iterator<Gossip> secretIterator();
+
+    /**
+     * @return gossips array iterator;
+     */
     Iterator<Gossip> gossipsIterator();
 
 }
