@@ -490,6 +490,7 @@ public class Main {
         else if(!community.hasSecrets(name))
             System.out.println(name + " lives a very boring life!");
         else {
+            System.out.println("Here's what we know about " + name + ":");
             listSecrets(community, name);
         }
 
@@ -505,7 +506,7 @@ public class Main {
 
         while (it.hasNext()) {
             Gossip secret = it.next();
-            System.out.println(secret.getShares() + " " + secret.getDescription() + ".");
+            System.out.println(secret.getShares() + " " + secret.getDescription());
         }
     }
 
