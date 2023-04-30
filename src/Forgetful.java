@@ -1,4 +1,3 @@
-import dataStructure.*;
 
 public class Forgetful extends PersonClass {
     private final int capacity;
@@ -16,6 +15,11 @@ public class Forgetful extends PersonClass {
         }
         else {
             gossips.get(0).removeShare();
+
+            if (gossips.get(0).getShares() == 0) {
+                secrets.remove(gossips.get(0));
+            }
+
             gossips.removeAt(0);
             super.addGossip(gossip);
         }
@@ -30,6 +34,7 @@ public class Forgetful extends PersonClass {
         if (last == gossips.size()) {
             last = 0;
         }
+
     }
 
 

@@ -99,7 +99,7 @@ public class LandmarkClass implements Landmark{
     }
 
     @Override
-    public int getOcupation() {
+    public int getOccupation() {
         return counter;
     }
 

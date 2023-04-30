@@ -153,7 +153,7 @@ public class Main {
      * Auxiliary method that prints the desired text.
      */
     private static void printLandmarks(Landmark landmark) {
-        System.out.println(landmark.getName() + ": " + landmark.getCapacity() + " " + landmark.getOcupation() + ".");
+        System.out.println(landmark.getName() + ": " + landmark.getCapacity() + " " + landmark.getOccupation() + ".");
     }
 
     /**
