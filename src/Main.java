@@ -1,6 +1,6 @@
 /**
  * @author Afonso de Sousa, 65548;
- * @author Miguel Victorino, 6;
+ * @author Miguel Victorino, 66070;
 */
 
 import dataStructure.Array;
@@ -8,7 +8,6 @@ import dataStructure.ArrayExt;
 import dataStructure.Iterator;
 
 import java.util.Scanner;
-
 
 
 public class Main {
@@ -77,9 +76,11 @@ public class Main {
 
     }
 
-   /**
-    * Method used to run the desired commands
-    */
+    /**
+     * @param input user input;
+     * @param community system class;
+     * checks user input against list of commands;
+     */
     public static void run(Scanner input, Community community) {
             String prompt = input.next().toLowerCase().trim();
             switch (prompt) {
@@ -472,6 +473,11 @@ public class Main {
 
     }
 
+    /**
+     * @param community system class;
+     * @param name name of the person;
+     * @return list of members of the group of the specified person;
+     */
     private static String getPeople(Community community, String name) {
         Iterator<Person> it = community.groupOfPeople(name);
 
