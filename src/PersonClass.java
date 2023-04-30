@@ -6,7 +6,7 @@ public abstract class PersonClass implements Person{
     private Landmark location;
     protected Array<Gossip> gossips;
     protected Array<Gossip> secrets;
-    protected int last;
+    protected int oldest;
 
 
     public PersonClass(String name) {
@@ -14,7 +14,7 @@ public abstract class PersonClass implements Person{
         location = null;
         secrets = new ArrayExt<>();
         gossips = new ArrayExt<>();
-
+        oldest = 0;
     }
 
     @Override
@@ -60,8 +60,26 @@ public abstract class PersonClass implements Person{
     @Override
     public void addGossip(Gossip gossip) {
         gossip.addShare();
-        gossips.insertLast(gossip);
         gossip.addPerson(this);
+        if ( oldest > 0 ) {
+            gossips.insertAt(gossip, oldest);
+            oldest++;
+        }
+        else {
+            gossips.insertLast(gossip);
+        }
+    }
+
+    @Override
+    public void shareGossips(Person other) {
+        Gossip share = gossips.get(0);
+        if (!other.knowsGossip(share)) {
+            other.addGossip(share);
+        }
+        gossips.removeAt(0);
+        gossips.insertLast(share);
+        oldest--;
+        if (oldest < 0) { oldest = gossips.size()-1; }
     }
 
     @Override
@@ -75,10 +93,6 @@ public abstract class PersonClass implements Person{
     }
 
 
-    @Override
-    public void resetLast() {
-        last = 0;
-    }
 
     @Override
     public void addSecrets(Gossip neo) {
@@ -111,11 +125,12 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
+    public void resetOrder() {}
+
+    @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
-        int tmp = last - 1;
-        if ( tmp < 0 ) { tmp = gossips.size() - 1; }
-        shared.insertLast(gossips.get(tmp));
+        shared.insertLast(gossips.get(gossips.size()-1));
         return shared.iterator();
     }
 

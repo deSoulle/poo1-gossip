@@ -63,11 +63,6 @@ public interface Person {
     int gossipsSize();
 
     /**
-     * resets the index of the last shared gossip
-     */
-    void resetLast();
-
-    /**
      * @param Secret new gossip object;
      * adds a new gossip about the person to the secrets array;
      */
@@ -92,4 +87,6 @@ public interface Person {
     Iterator<Gossip> gossipsIterator();
 
     void removeGossip(GossipClass gossip);
+
+    void resetOrder();
 }
