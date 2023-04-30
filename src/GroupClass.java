@@ -39,14 +39,23 @@ public class GroupClass implements Group{
     @Override
     public String listGroupies(Person person) {
         String list = "";
-        for(int i = 0; i < people.size(); i ++) {
+        for(int i = 0; i < people.size() - 1; i ++) {
             Person groupie = people.get(i);
             if(!groupie.equals(person)) {
               list = list.concat(groupie.getName() + ", ");
             }
         }
+        Person lastGroupie = people.get(size() - 1);
+        if(!lastGroupie.equals(person)) {
+            list = list.concat(lastGroupie.getName());
+        }
 
         return list;
+    }
+
+    @Override
+    public String listShared(Person person) {
+        return listGroupies(person).concat(", ");
     }
 
     @Override

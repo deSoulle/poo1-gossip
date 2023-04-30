@@ -32,6 +32,8 @@ public interface Group {
      */
     String listGroupies(Person person);
 
+    String listShared(Person person);
+
     /**
      * @return the size of the group;
      */
