@@ -14,6 +14,7 @@ public class GossipClass implements Gossip {
         this.involved = involved;
         this.description = description;
         shares = 0;
+        knows = new ArrayExt<>();
     }
 
     @Override
