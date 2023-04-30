@@ -1,3 +1,5 @@
+import dataStructure.Iterator;
+
 public interface Group {
 
     /**
@@ -38,4 +40,6 @@ public interface Group {
      * @return the size of the group;
      */
     int size();
+
+    Iterator<Person> peopleIterator();
 }

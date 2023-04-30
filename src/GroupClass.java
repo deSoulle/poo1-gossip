@@ -63,4 +63,9 @@ public class GroupClass implements Group{
         return people.size();
     }
 
+    @Override
+    public Iterator<Person> peopleIterator() {
+        return people.iterator();
+    }
+
 }

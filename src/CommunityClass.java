@@ -173,15 +173,6 @@ public class CommunityClass implements Community {
     }
 
     @Override
-    public String getShared(String name) {
-        Person person = getPerson(name);
-        Landmark landmark = person.location();
-        Group group = landmark.getGroup(person);
-
-        return group.listShared(person);
-    }
-
-    @Override
     public boolean sameGroup(String name1, String name2) {
         Person person1 = getPerson(name1);
         Person person2 = getPerson(name2);
@@ -347,6 +338,11 @@ public class CommunityClass implements Community {
     public Iterator<Gossip> hottestIterator() {
         Array<Gossip> hottest = findHottest();
         return hottest.iterator();
+    }
+    @Override
+    public Iterator<Person> groupOfPeople(String name) {
+        Person person = getPerson(name);
+        return person.location().getGroup(person).peopleIterator();
     }
 
     private Array<Gossip> findHottest() {

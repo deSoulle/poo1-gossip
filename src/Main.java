@@ -458,10 +458,23 @@ public class Main {
         }
         else {
             community.shareGossips(name);
-            System.out.println(name + " shared with " + community.getShared(name) + " some hot news!");
+            System.out.println(name + " shared with " + getPeople(community, name) + "some hot news!");
             listSharedGossips(community, name);
         }
 
+    }
+
+    private static String getPeople(Community community, String name) {
+        Iterator<Person> it = community.groupOfPeople(name);
+
+        String group = "";
+        while (it.hasNext()) {
+            Person person = it.next();
+            if (!person.getName().equals(name)) {
+                group = group.concat(person.getName() + ", ");
+            }
+        }
+        return group;
     }
 
     /**

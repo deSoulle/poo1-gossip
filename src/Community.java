@@ -101,7 +101,6 @@ public interface Community {
      */
     String getGroupies(String name);
 
-    String getShared(String name);
     /**
      * @param name1 name of the first person;
      * @param name2 name of the second person;
@@ -217,4 +216,5 @@ public interface Community {
      */
     Iterator<Gossip> hottestIterator();
 
+    Iterator<Person> groupOfPeople(String name);
 }
