@@ -1,10 +1,16 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 public class LandmarkClass implements Landmark{
 
+    //name of the landmark;
     private final String name;
+    //capacity of the landmark;
     private final int capacity;
+    //number of people at the landmark;
     private int counter;
+    //group array with all the groups at the landmark;
     private Array<Group> groups;
 
 

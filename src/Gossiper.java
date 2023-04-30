@@ -1,4 +1,6 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 public class Gossiper extends PersonClass {
 

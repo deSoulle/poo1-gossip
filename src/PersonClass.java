@@ -1,11 +1,18 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 public abstract class PersonClass implements Person{
 
+    //name of the person
     private final String name;
+    //landmark where the person is registered;
     private Landmark location;
+    //gossips the person knows;
     protected Array<Gossip> gossips;
+    //gossips that involve the person;
     protected Array<Gossip> secrets;
+    //index in the gossips array of the oldest gossip;
     protected int oldest;
 
 

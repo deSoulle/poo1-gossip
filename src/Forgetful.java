@@ -2,7 +2,11 @@ import dataStructure.Array;
 import dataStructure.ArrayExt;
 
 public class Forgetful extends PersonClass {
+
+    //gossip capacity of the forgetful-type person;
     private final int capacity;
+
+    //gossip array sorted from oldest to newest gossips;
     private Array<Gossip> original;
 
 
