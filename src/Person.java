@@ -58,6 +58,10 @@ public interface Person {
     boolean hasSecrets();
 
     /**
+     * @return true if the person knows gossips that involve them;
+     */
+    boolean knowsSecrets();
+    /**
      * @return number of gossips known by the person;
      */
     int gossipsSize();
@@ -69,9 +73,11 @@ public interface Person {
     void addSecret(Gossip secret);
 
     /**
-     * @return
+     * @return iterator of the las
      */
     Iterator<Gossip> sharedIterator();
     Iterator<Gossip> secretIterator();
     Iterator<Gossip> gossipsIterator();
+
+
 }

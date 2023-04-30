@@ -150,9 +150,9 @@ public interface Community {
 
     /**
      * @param name name of the person;
-     * @return true if person's person-type is sealed;
+     * @return true if person's person-type is sealed and has gossips about themselves;
      */
-    boolean isSealed(String name);
+    boolean hasAboutThem(String name);
 
     /**
      * @param name name of the person;
@@ -215,5 +215,6 @@ public interface Community {
      * @return iterator of the most shared gossips;
      */
     Iterator<Gossip> hottestIterator();
+
 
 }
