@@ -35,7 +35,7 @@ public class Forgetful extends PersonClass {
     @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
-        shared.insertLast(gossips.get(0));
+        shared.insertLast(gossips.get(last - 1));
         return shared.iterator();
     }
 
