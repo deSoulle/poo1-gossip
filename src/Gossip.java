@@ -16,6 +16,7 @@ public interface Gossip {
      * @return share counter;
      */
     int getShares();
+    void removeShare();
 
     /**
      * @param name name of the creator/author of the gossip;
@@ -30,4 +31,5 @@ public interface Gossip {
      * @return true if the person is one the involved people in the gossip;
      */
     boolean isAbout(Person person);
+
 }

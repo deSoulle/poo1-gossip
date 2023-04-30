@@ -15,7 +15,6 @@ public class Gossiper extends PersonClass{
         for (int i = 0 ; i < num; i ++) {
             Gossip share = gossips.get(last);
             if (!other.knowsGossip(share)) {
-                share.addShare();
                 other.addGossip(share);
             }
             last ++;

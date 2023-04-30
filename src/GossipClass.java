@@ -31,6 +31,11 @@ public class GossipClass implements Gossip {
     }
 
     @Override
+    public void removeShare() {
+        shares--;
+    }
+
+    @Override
     public boolean isTheSame(Person person, Array<Person> targets, String description) {
         return author.equals(person) && targetsAreEqual(targets) && description.equals(this.description);
     }

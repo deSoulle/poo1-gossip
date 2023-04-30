@@ -59,6 +59,7 @@ public abstract class PersonClass implements Person{
 
     @Override
     public void addGossip(Gossip gossip) {
+        gossip.addShare();
         if (gossip.isAbout(this)) { secrets.insertLast(gossip); }
         gossips.insertLast(gossip);
     }

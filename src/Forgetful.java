@@ -15,7 +15,9 @@ public class Forgetful extends PersonClass {
             super.addGossip(gossip);
         }
         else {
-            super.gossips.removeAt(0);
+            gossips.get(0).removeShare();
+            if (gossips.get(0).getShares() == 0) { secrets.remove(gossips.get(0)); }
+            gossips.removeAt(0);
             super.addGossip(gossip);
         }
     }
@@ -24,7 +26,6 @@ public class Forgetful extends PersonClass {
     public void shareGossips(Person other) {
         Gossip share = gossips.get(last++);
         if (!other.knowsGossip(share)) {
-            share.addShare();
             other.addGossip(share);
         }
         if (last == gossips.size()) {
