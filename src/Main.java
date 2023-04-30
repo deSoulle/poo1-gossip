@@ -420,6 +420,11 @@ public class Main {
 
     }
 
+    /**
+     * @param targets list of people involved in a target;
+     * @return a String with all the names of involved people in a gossip;
+     * auxiliary method that joins all the names of involved people in a String separated by commas;
+     */
     private static String listTargets(Array<String> targets) {
         String list = "";
         list = list.concat(targets.get(0));
@@ -460,9 +465,9 @@ public class Main {
     }
 
     /**
-     * @param community class system;
-     * @param name name of the person that shared gossips;
-     * lists all the gossips shared by the specified person.
+     * @param community system class;
+     * @param name name of the person;
+     * auxiliary method to iterate the last shared gossips by a person;
      */
     private static void listSharedGossips(Community community, String name) {
         Iterator<Gossip> it = community.sharedGossipsIterator(name);
@@ -491,9 +496,9 @@ public class Main {
     }
 
     /**
-     * @param community class system;
-     * @param name name of the person whose secrets are about;
-     * lists all the secrets about a person and how many people know about them.
+     * @param community system class;
+     * @param name name of the person;
+     * auxiliary method to iterate the gossips about a person (iterates the secrets array of the person);
      */
     private static void listSecrets(Community community, String name) {
         Iterator<Gossip> it = community.secretsIterator(name);
