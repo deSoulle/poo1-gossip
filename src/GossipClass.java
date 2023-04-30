@@ -7,14 +7,14 @@ public class GossipClass implements Gossip {
     private Array<Person> involved;
     private final String description;
     private int shares;
-    private Array<Person> knows;
+    private Array<Person> active;
 
     public GossipClass(Person author, Array<Person> involved, String description) {
         this.author = author;
         this.involved = involved;
         this.description = description;
         shares = 0;
-        knows = new ArrayExt<>();
+        active = new ArrayExt<>();
     }
 
     @Override
@@ -33,11 +33,6 @@ public class GossipClass implements Gossip {
     }
 
     @Override
-    public void removeShare() {
-        shares--;
-    }
-
-    @Override
     public boolean isTheSame(Person person, Array<Person> targets, String description) {
         return author.equals(person) && targetsAreEqual(targets) && description.equals(this.description);
     }
@@ -53,14 +48,17 @@ public class GossipClass implements Gossip {
     }
 
     @Override
-    public void addPerson(Person person) {
-        knows.insertLast(person);
+    public void addActive(Person person) {
+        active.insertLast(person);
     }
 
     @Override
-    public void delete() {
-        for ( int i = 0; i < involved.size(); i++ ) {
-            involved.get(i).removeGossip(this);
+    public void removeActive(Person person) {
+        active.remove(person);
+        if(active.size() == 0) {
+            for ( int i = 0; i < involved.size(); i++ ) {
+                involved.get(i).removeSecret(this);
+            }
         }
     }
 

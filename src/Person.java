@@ -68,14 +68,16 @@ public interface Person {
      */
     void addSecrets(Gossip Secret);
 
+    void removeSecret(Gossip gossip);
+
+    boolean knowsSecrets();
+    void resetOrder();
+
     /**
      * @return gossip iterator;
      * makes an iterator of the last gossips shared;
      */
     Iterator<Gossip> sharedIterator();
-
-    boolean knowsSecrets();
-
     /**
      * @return secrets array iterator;
      */
@@ -86,7 +88,6 @@ public interface Person {
      */
     Iterator<Gossip> gossipsIterator();
 
-    void removeGossip(GossipClass gossip);
 
-    void resetOrder();
+
 }

@@ -341,16 +341,16 @@ public class CommunityClass implements Community {
     }
 
     private Array<Gossip> findHottest() {
-        Array<Gossip> hottests = new ArrayExt<>();
+        Array<Gossip> hottest = new ArrayExt<>();
         int maxShares = 0;
 
         for (int i = 0; i < gossips.size(); i ++) {
             Gossip gossip = gossips.get(i);
             if(gossip.getShares() >= maxShares) {
-                hottests = new ArrayExt<>();
-                hottests.insertLast(gossip);
+                hottest = new ArrayExt<>();
+                hottest.insertLast(gossip);
             }
         }
-        return hottests;
+        return hottest;
     }
 }

@@ -17,23 +17,17 @@ public class Forgetful extends PersonClass {
 
     @Override
     public void addGossip(Gossip gossip) {
-        if (!(gossips.size() == capacity)) {
-            super.addGossip(gossip);
-            original.insertLast(gossip);
-        }
-        else {
-            if ( original.get(0).getShares() == 0 ) { original.get(0).delete(); }
-            gossips.remove(original.get(0));
-            original.removeAt(0);
-            super.addGossip(gossip);
-            original.insertLast(gossip);
-            oldest = gossips.searchIndexOf(original.get(0));
-        }
-    }
+        if(gossips.size() == capacity) {
+            Gossip lost = original.get(0);
+            gossips.remove(lost);
+            original.remove(lost);
+            lost.removeActive(this);
 
-    @Override
-    public void shareGossips(Person other) {
-        super.shareGossips(other);
+        }
+        original.insertLast(gossip);
+        gossips.insertLast(gossip);
+        gossip.addActive(this);
+
     }
 
     @Override

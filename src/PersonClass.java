@@ -59,9 +59,8 @@ public abstract class PersonClass implements Person{
 
     @Override
     public void addGossip(Gossip gossip) {
-        gossip.addShare();
-        gossip.addPerson(this);
-        if ( oldest > 0 ) {
+        gossip.addActive(this);
+        if (oldest > 0 ) {
             gossips.insertAt(gossip, oldest);
             oldest++;
         }
@@ -73,13 +72,17 @@ public abstract class PersonClass implements Person{
     @Override
     public void shareGossips(Person other) {
         Gossip share = gossips.get(0);
+        share.addShare();
+
         if (!other.knowsGossip(share)) {
             other.addGossip(share);
         }
         gossips.removeAt(0);
         gossips.insertLast(share);
-        oldest--;
-        if (oldest < 0) { oldest = gossips.size()-1; }
+        oldest --;
+        if (oldest < 0) {
+            oldest = gossips.size() - 1;
+        }
     }
 
     @Override
@@ -91,8 +94,6 @@ public abstract class PersonClass implements Person{
     public int gossipsSize() {
         return gossips.size();
     }
-
-
 
     @Override
     public void addSecrets(Gossip neo) {
@@ -120,7 +121,7 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
-    public void removeGossip(GossipClass gossip) {
+    public void removeSecret(Gossip gossip) {
         secrets.remove(gossip);
     }
 

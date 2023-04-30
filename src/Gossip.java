@@ -16,11 +16,18 @@ public interface Gossip {
      * @return share counter;
      */
     int getShares();
-    void removeShare();
 
     /**
-     * @param name name of the creator/author of the gossip;
-     * @param targets people whose gossip is about;
+     * @param person person object;
+     *               adds a person that knows this gossip;
+     */
+    void addActive(Person person);
+
+    void removeActive(Person person);
+
+    /**
+     * @param name        name of the creator/author of the gossip;
+     * @param targets     people whose gossip is about;
      * @param description description/body of the gossip;
      * @return true if the gossip has the same attributes as the parameters;
      */
@@ -32,7 +39,4 @@ public interface Gossip {
      */
     boolean isAbout(Person person);
 
-    void addPerson(Person person);
-
-    void delete();
 }

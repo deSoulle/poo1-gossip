@@ -6,11 +6,6 @@ public class Sealed extends PersonClass{
         super(name);
     }
 
-    @Override
-    public void shareGossips(Person other) {
-        super.shareGossips(other);
-    }
-
 
 }
 

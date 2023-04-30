@@ -1,6 +1,6 @@
 import dataStructure.*;
 
-public class Gossiper extends PersonClass{
+public class Gossiper extends PersonClass {
 
 
     public Gossiper(String name) {
@@ -27,7 +27,7 @@ public class Gossiper extends PersonClass{
         for(int i = 0; i < num; i ++) {
             if (tmp < 0) { tmp = gossips.size() + tmp - i; }
 
-            shared.insertLast(gossips.get(tmp++));
+            shared.insertLast(gossips.get(tmp ++));
         }
 
         return shared.iterator();
