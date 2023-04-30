@@ -22,10 +22,6 @@ public class Sealed extends PersonClass{
 
     }
 
-    public void resetLast() {
-        last = 0;
-    }
-
     @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();

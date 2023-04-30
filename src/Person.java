@@ -68,10 +68,13 @@ public interface Person {
      */
     void addSecret(Gossip secret);
 
+    void resetLast();
+
     /**
      * @return
      */
     Iterator<Gossip> sharedIterator();
     Iterator<Gossip> secretIterator();
     Iterator<Gossip> gossipsIterator();
+
 }

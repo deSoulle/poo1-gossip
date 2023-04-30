@@ -78,6 +78,11 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
+    public void resetLast() {
+        last = 0;
+    }
+
+    @Override
     public Iterator<Gossip> secretIterator() {
         return secrets.iterator();
     }
