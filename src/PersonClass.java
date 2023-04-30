@@ -60,7 +60,6 @@ public abstract class PersonClass implements Person{
     @Override
     public void addGossip(Gossip gossip) {
         gossip.addShare();
-        if (gossip.isAbout(this)) { secrets.insertLast(gossip); }
         gossips.insertLast(gossip);
     }
 
@@ -78,6 +77,11 @@ public abstract class PersonClass implements Person{
     @Override
     public void resetLast() {
         last = 0;
+    }
+
+    @Override
+    public void addSecrets(Gossip neo) {
+        secrets.insertLast(neo);
     }
 
     @Override

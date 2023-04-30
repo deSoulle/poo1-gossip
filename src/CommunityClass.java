@@ -204,6 +204,10 @@ public class CommunityClass implements Community {
         gossips.insertLast(neo);
         person.addGossip(neo);
 
+        for (int i = 0; i < involved.size(); i++) {
+            involved.get(i).addSecrets(neo);
+        }
+
     }
 
     private boolean findGossipIdx(Person author, Array<Person> targets, String description)  {

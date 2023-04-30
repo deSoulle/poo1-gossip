@@ -63,6 +63,7 @@ public interface Person {
     int gossipsSize();
 
     void resetLast();
+    void addSecrets(Gossip neo);
 
     /**
      * @return gossip iterator;
