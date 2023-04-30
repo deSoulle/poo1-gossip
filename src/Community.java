@@ -150,7 +150,7 @@ public interface Community {
 
     /**
      * @param name name of the person;
-     * @return true if person's person-type is sealed;
+     * @return true if person's person-type is sealed and that person knows a gossip about themselves;
      */
     boolean hasAboutThem(String name);
 
