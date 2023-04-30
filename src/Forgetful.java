@@ -33,14 +33,6 @@ public class Forgetful extends PersonClass {
         }
     }
 
-    @Override
-    public Iterator<Gossip> sharedIterator() {
-        Array<Gossip> shared = new ArrayExt<>();
-        int tmp = last - 1;
-        if ( tmp < 0 ) { tmp = gossips.size() - 1; }
-        shared.insertLast(gossips.get(tmp));
-        return shared.iterator();
-    }
 
 
 }

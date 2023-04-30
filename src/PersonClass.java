@@ -89,4 +89,14 @@ public abstract class PersonClass implements Person{
     public Iterator<Gossip> gossipsIterator() {
         return gossips.iterator();
     }
+
+    @Override
+    public Iterator<Gossip> sharedIterator() {
+        Array<Gossip> shared = new ArrayExt<>();
+        int tmp = last - 1;
+        if ( tmp < 0 ) { tmp = gossips.size() - 1; }
+        shared.insertLast(gossips.get(tmp));
+        return shared.iterator();
+    }
+    
 }

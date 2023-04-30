@@ -33,7 +33,8 @@ public class Gossiper extends PersonClass{
 
         for(int i = 0; i < num; i ++) {
             shared.insertAt(gossips.get(tmp --), i);
-            if (tmp < 0) { tmp = gossips.size() - 1; }
+            if (tmp < 0) {
+                tmp = gossips.size() - 1; }
         }
 
         return shared.iterator();
