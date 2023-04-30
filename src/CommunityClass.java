@@ -65,6 +65,7 @@ public class CommunityClass implements Community {
         }
     }
 
+
     private Person getPerson(String name) {
         for(int i = 0; i < people.size(); i ++) {
             Person person = people.get(i);
@@ -350,6 +351,11 @@ public class CommunityClass implements Community {
         return person.location().getGroup(person).peopleIterator();
     }
 
+
+    /**
+     * @return list of the most shared gossips;
+     * auxiliary method to list the hottest gossips;
+     */
     private Array<Gossip> findHottest() {
         Array<Gossip> hottest = new ArrayExt<>();
         int maxShares = 0;

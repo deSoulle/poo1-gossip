@@ -215,5 +215,9 @@ public interface Community {
      */
     Iterator<Gossip> hottestIterator();
 
+    /**
+     * @param name name of the person;
+     * @return people array of the group where the person is registered;
+     */
     Iterator<Person> groupOfPeople(String name);
 }

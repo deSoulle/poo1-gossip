@@ -89,6 +89,7 @@ public interface Person {
      * makes an iterator of the last gossips shared;
      */
     Iterator<Gossip> sharedIterator();
+
     /**
      * @return secrets array iterator;
      */
