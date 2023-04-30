@@ -29,8 +29,11 @@ public class Gossiper extends PersonClass{
     @Override
     public Iterator<Gossip> sharedIterator() {
         Array<Gossip> shared = new ArrayExt<>();
-        for(int i = 0; i < 3; i ++) {
-            shared.insertLast(gossips.get(i));
+        int num = Math.min(gossips.size(), 3) + 1;
+        int tmp = last;
+        for(int i = num; i > 0; i --) {
+            shared.insertLast(gossips.get(tmp - i));
+            if (tmp == 0) { tmp = gossips.size() - 1; }
         }
         return shared.iterator();
     }
