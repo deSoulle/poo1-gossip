@@ -323,7 +323,7 @@ public class Main {
             System.out.println(place + " does not exist!");
         }
         else if (community.isEmpty(place)) {
-            System.out.println("Nobody is at " + place + ".");
+            System.out.println("Nobody is at " + place + "!");
         }
         else {
             listGroups(community, place);
