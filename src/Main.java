@@ -524,7 +524,7 @@ public class Main {
         Iterator<Gossip> it = community.secretsIterator(name);
         while (it.hasNext()) {
             Gossip secret = it.next();
-            System.out.println(secret.getShares() + " " + secret.getDescription());
+            System.out.println(secret.getActive() + " " + secret.getDescription());
         }
     }
 

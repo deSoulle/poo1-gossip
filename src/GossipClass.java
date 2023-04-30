@@ -48,6 +48,11 @@ public class GossipClass implements Gossip {
     }
 
     @Override
+    public int getActive() {
+        return active.size();
+    }
+
+    @Override
     public void addActive(Person person) {
         active.insertLast(person);
     }

@@ -39,4 +39,5 @@ public interface Gossip {
      */
     boolean isAbout(Person person);
 
+    int getActive();
 }
