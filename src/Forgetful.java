@@ -11,7 +11,7 @@ public class Forgetful extends PersonClass {
 
     @Override
     public void addGossip(Gossip gossip) {
-        if (!(super.gossips.size() == capacity)) {
+        if (!(gossips.size() == capacity)) {
             super.addGossip(gossip);
         }
         else {
@@ -23,8 +23,8 @@ public class Forgetful extends PersonClass {
     @Override
     public void shareGossips(Person other) {
         Gossip share = gossips.get(last++);
-        share.addShare();
         if (!other.knowsGossip(share)) {
+            share.addShare();
             other.addGossip(share);
         }
         if (last == gossips.size()) {
