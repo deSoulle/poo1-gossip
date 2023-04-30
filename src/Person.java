@@ -1,4 +1,4 @@
-import dataStructure.*;
+import dataStructure.Iterator;
 
 public interface Person {
 

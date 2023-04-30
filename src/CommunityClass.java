@@ -1,10 +1,15 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 public class CommunityClass implements Community {
+
+    //auxiliary String constants
     private static final String FORGETFUL = "forgetful";
     private static final String GOSSIPER = "gossiper";
     private static final String SEALED = "sealed";
 
+    // arrays storing all the landmarks, people and active gossips;
     Array<Landmark> landmarks;
     Array<Person> people;
     Array<Gossip> gossips;
@@ -33,6 +38,10 @@ public class CommunityClass implements Community {
         landmarks.insertLast(new LandmarkClass(name, capacity));
     }
 
+    /**
+     * @param place name of the landmark;
+     * @return landmark object with the specified name;
+     */
     private Landmark getLandmark(String place) {
         for (int i = 0; i < landmarks.size(); i++) {
             Landmark landmark = landmarks.get(i);
@@ -65,7 +74,10 @@ public class CommunityClass implements Community {
         }
     }
 
-
+    /**
+     * @param name name of the person;
+     * @return person object with the specified name;
+     */
     private Person getPerson(String name) {
         for(int i = 0; i < people.size(); i ++) {
             Person person = people.get(i);
@@ -211,6 +223,12 @@ public class CommunityClass implements Community {
 
     }
 
+    /**
+     * @param author name of the person who started the gossip;
+     * @param targets name of the people involved;
+     * @param description description/body of the gossip;
+     * @return true if there's already an active gossip with the same parameters;
+     */
     private boolean findGossipIdx(Person author, Array<Person> targets, String description)  {
         for (int i = 0; i < gossips.size(); i++) {
             if (gossips.get(i).isTheSame(author, targets, description)) {
@@ -236,6 +254,10 @@ public class CommunityClass implements Community {
         return hasShares();
     }
 
+    /**
+     * @return true if at least one gossip was shared;
+     * auxiliary method to check if any gossip has been shared;
+     */
     private boolean hasShares() {
         for (int i = 0; i < gossips.size(); i++) {
             if (gossips.get(i).getShares() > 0) {

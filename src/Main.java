@@ -3,7 +3,9 @@
  * @author Miguel Victorino, 6;
 */
 
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 import java.util.Scanner;
 
@@ -568,7 +570,6 @@ public class Main {
      *lists the most shared gossips;
      */
     private static void hottest(Community community) {
-
         if (!community.hasGossips()) {
             System.out.println("No gossips we are aware of!");
         } else if (!community.hasSharedGossips()) {
@@ -576,6 +577,7 @@ public class Main {
         } else {
             listHottest(community);
         }
+
     }
 
     /**

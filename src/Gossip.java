@@ -1,4 +1,4 @@
-import dataStructure.*;
+import dataStructure.Array;
 
 public interface Gossip {
 

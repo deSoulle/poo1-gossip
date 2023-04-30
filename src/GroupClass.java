@@ -1,7 +1,10 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
+import dataStructure.Iterator;
 
 public class GroupClass implements Group{
 
+    //array with the members of the group;
     Array<Person> people;
 
 

@@ -1,12 +1,18 @@
-import dataStructure.*;
+import dataStructure.Array;
+import dataStructure.ArrayExt;
 
 
 public class GossipClass implements Gossip {
 
+    //person who created the gossip
     private final Person author;
-    private Array<Person> involved;
+    //description/body of the gossip;
     private final String description;
+    //number of times the gossip was shared;
     private int shares;
+    //person array with the people involved in the gossip;
+    private Array<Person> involved;
+    //person array with the people that know the gossip;
     private Array<Person> active;
 
     public GossipClass(Person author, Array<Person> involved, String description) {
@@ -67,6 +73,10 @@ public class GossipClass implements Gossip {
         }
     }
 
+    /**
+     * @param targets person array of people involved in a gossip;
+     * @return true if the array given has the same people involved as the gossip;
+     */
     private boolean targetsAreEqual(Array<Person> targets) {
         if(targets.size() == involved.size()) {
             for (int i = 0; i < involved.size(); i++) {
