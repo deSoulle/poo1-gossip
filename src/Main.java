@@ -341,7 +341,13 @@ public class Main {
 
         System.out.println(community.getGroups(place) +  " groups at " + place + ":");
         while (it.hasNext()) {
-               System.out.println(it.next().listGroupies(null));
+            String group = "";
+            Iterator<Person> itP = it.next().peopleIterator();
+            while (itP.hasNext()) {
+                Person person = itP.next();
+                group = group.concat(person.getName() + ", ");
+            }
+            System.out.println(group.substring(0, group.length() - 2));
         }
     }
 
