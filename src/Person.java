@@ -63,14 +63,25 @@ public interface Person {
     int gossipsSize();
 
     /**
-     * @param Secret new gossip object;
+     * @param secret new gossip object;
      * adds a new gossip about the person to the secrets array;
      */
-    void addSecrets(Gossip Secret);
+    void addSecrets(Gossip secret);
 
-    void removeSecret(Gossip gossip);
+    /**
+     * @param secret gossip object;
+     * removes the gossip about the person to the secrets array;
+     */
+    void removeSecret(Gossip secret);
 
+    /**
+     * @return true if the person knows a gossip about themselves;
+     */
     boolean knowsSecrets();
+
+    /**
+     * sets the gossips array to the order which the gossips were received;
+     */
     void resetOrder();
 
     /**
