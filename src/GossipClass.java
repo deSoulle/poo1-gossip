@@ -67,6 +67,7 @@ public class GossipClass implements Gossip {
     public void removeActive(Person person) {
         active.remove(person);
         if(active.size() == 0) {
+            shares = 0;
             for ( int i = 0; i < involved.size(); i++ ) {
                 involved.get(i).removeSecret(this);
             }
