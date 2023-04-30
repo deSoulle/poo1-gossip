@@ -458,7 +458,7 @@ public class Main {
         }
         else {
             community.shareGossips(name);
-            System.out.println(name + " shared with " + community.getGroupies(name) + "some hot news!");
+            System.out.println(name + " shared with " + community.getShared(name) + " some hot news!");
             listSharedGossips(community, name);
         }
 
