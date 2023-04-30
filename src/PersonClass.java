@@ -61,6 +61,7 @@ public abstract class PersonClass implements Person{
     public void addGossip(Gossip gossip) {
         gossip.addShare();
         gossips.insertLast(gossip);
+        gossip.addPerson(this);
     }
 
     @Override

@@ -32,4 +32,5 @@ public interface Gossip {
      */
     boolean isAbout(Person person);
 
+    void addPerson(Person person);
 }

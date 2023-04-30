@@ -4,15 +4,17 @@ import dataStructure.*;
 public class GossipClass implements Gossip {
 
     private final Person author;
-    Array<Person> involved;
+    private Array<Person> involved;
     private final String description;
     private int shares;
+    private Array<Person> knows;
 
     public GossipClass(Person author, Array<Person> involved, String description) {
         this.author = author;
         this.involved = involved;
         this.description = description;
         shares = 0;
+        knows = new ArrayExt<>();
     }
 
     @Override
@@ -48,6 +50,11 @@ public class GossipClass implements Gossip {
             }
         }
         return false;
+    }
+
+    @Override
+    public void addPerson(Person person) {
+        knows.insertLast(person);
     }
 
     private boolean targetsAreEqual(Array<Person> targets) {
