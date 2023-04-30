@@ -69,16 +69,6 @@ public abstract class PersonClass implements Person{
     }
 
     @Override
-    public boolean knowsSecrets() {
-        for(int i = 0; i < gossips.size(); i ++) {
-            if(gossips.get(i).isAbout(this)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public int gossipsSize() {
         return gossips.size();
     }

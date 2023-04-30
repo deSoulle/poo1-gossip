@@ -247,12 +247,9 @@ public class CommunityClass implements Community {
     }
 
     @Override
-    public boolean hasAboutThem(String name) {
+    public boolean isSealed(String name) {
         Person person = getPerson(name);
-        if(person instanceof Sealed) {
-            return person.knowsSecrets();
-        }
-        else return false;
+        return person instanceof Sealed;
     }
 
     @Override

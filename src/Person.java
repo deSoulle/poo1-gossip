@@ -24,7 +24,7 @@ public interface Person {
 
     /**
      * @param destination new landmark location;
-     *                    changes the location to the new landmark;
+     * changes the location to the new landmark;
      */
     void move(Landmark destination);
 
@@ -41,13 +41,13 @@ public interface Person {
 
     /**
      * @param gossip new gossip object;
-     *               adds the new gossip to the gossips array of the person;
+     * adds the new gossip to the gossips array of the person;
      */
     void addGossip(Gossip gossip);
 
     /**
      * @param other other person object;
-     *              shares known gossips with the other person;
+     * shares known gossips with the other person;
      */
     void shareGossips(Person other);
 
@@ -58,11 +58,6 @@ public interface Person {
     boolean hasSecrets();
 
     /**
-     * @return true if the person knows gossips that involve them;
-     */
-    boolean knowsSecrets();
-
-    /**
      * @return number of gossips known by the person;
      */
     int gossipsSize();
@@ -70,14 +65,10 @@ public interface Person {
     void resetLast();
 
     /**
-     * @return iterator of the las
+     * @return
      */
     Iterator<Gossip> sharedIterator();
-
     Iterator<Gossip> secretIterator();
-
     Iterator<Gossip> gossipsIterator();
 
 }
-
-

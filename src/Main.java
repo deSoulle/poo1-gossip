@@ -448,7 +448,7 @@ public class Main {
         else if(!community.knowsGossips(name)) {
             System.out.println(name + " knows nothing!");
         }
-        else if(community.hasAboutThem(name)) {
+        else if(community.isSealed(name)) {
             System.out.println(name + " does not wish to gossip right now!");
         }
         else {
