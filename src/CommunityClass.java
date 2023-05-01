@@ -367,6 +367,7 @@ public class CommunityClass implements Community {
         Array<Gossip> hottest = findHottest();
         return hottest.iterator();
     }
+
     @Override
     public Iterator<Person> groupOfPeople(String name) {
         Person person = getPerson(name);

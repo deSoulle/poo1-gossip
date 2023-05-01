@@ -104,10 +104,8 @@ public class Main {
                 case SECRETS -> secrets(input, community);
                 case INFOTAINMENT -> infotainment(input, community);
                 case HOTTEST -> hottest(community);
-                default -> {
-                    input.nextLine();
-                    System.out.println("Unknown command. Type help to see available commands.");
-                }
+                default -> System.out.println("Unknown command. Type help to see available commands.");
+
             }
     }
 
@@ -334,7 +332,6 @@ public class Main {
 
     }
 
-
     /**
      * @param community class system;
      * Lists all the groups at the specified landmark.
@@ -353,7 +350,6 @@ public class Main {
             System.out.println(group.substring(0, group.length() - 2));
         }
     }
-
 
     /**
      * @param input user input;
@@ -442,8 +438,6 @@ public class Main {
         }
         return list;
     }
-
-
 
     /**
      * @param input user input;
